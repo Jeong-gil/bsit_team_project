@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+.y_product-classification-header {
+	font-size: 22px;
+	font-weight: bold;
+	margin-top: 50px;
+	margin-bottom: 13px;
+	margin-top: 100px;
+}
+
+.y_ranking-category {
+	margin: 40px 0px 10px 0px;
+	font-size: 15px;
+}
+
+.y_container-row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: flex-start;
+	padding-bottom: 100px;
+}
+
+.y_container-col {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-content: flex-start;
+/* 	align-items: center; */
+}
+
+.y_item {
+	width: 250px;
+	height: 350px;
+	margin: 20px 10px;
+/* 	border: 1px solid green; */
+	background: #f1ae89;
+}
+
+.y_cursor-pointer {
+	border: 1px solid gray;
+	cursor: pointer;
+}
+
+.y_thumbnail-img {
+	width: 250px;
+	height: 250px;
+}
+
+.y_overflow-text {
+	display: inline-block;
+	width: 250px;
+	margin-top: 14px;
+	font-size: 16px;
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

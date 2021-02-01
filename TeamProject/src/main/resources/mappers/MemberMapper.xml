@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.MemberMapper">
+
+	<!-- 회원가입 -->
+	<insert id="addMember">
+		INSERT INTO j_member (id, pw, name, email, tel, address, gender, birthday, push, regDate) 
+		VALUES (#{id}, #{pw}, #{name}, #{email}, #{tel}, #{address}, #{gender}, #{birthday}, #{push}, #{regDate})
+	</insert>
+	
+	<!-- 아이디 중복확인 >> 아이디가 있으면 1 없으면 0 -->
+	<select id="getCountById" resultType="int">
+		SELECT COUNT(*) FROM member WHERE id = #{id}
+	</select>
+	
+	<!-- 로그인 -->
+	<select id="getPw" resultType="string">
+		SELECT pw FROM jollymember WHERE id = #{id}
+	</select>
+	
+</mapper>

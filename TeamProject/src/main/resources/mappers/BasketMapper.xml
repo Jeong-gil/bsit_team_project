@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BasketMapper">
+
+	<!-- 장바구니 단일 상품 제거 -->
+	<delete id="deleteOne">
+		DELETE FROM jolly_cart WHERE (consumer_id = #{consumerID}) AND (goods_name = #{goodsName});
+	</delete>
+
+	<!-- 장바구니 추가하기 -->
+	<insert id="addBasket">
+		INSERT INTO jolly_cart (`consumer_id`, `goods_name`, `amount`) VALUES (#{consumerID}, #{goodsName}, #{amount});
+	</insert>
+	
+</mapper>

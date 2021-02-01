@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.GoodsMapper">
+
+	<!-- 전체 상품 불러오기 -->
+	<select id="getAllGoods" resultType="goodsVo">
+		SELECT * FROM jollygoods ORDER BY upload DESC
+	</select>
+	
+	<select id="getProductDetail" resultType="goodsVo">
+		SELECT * FROM jollygoods WHERE goods_name = #{goodsName}
+	</select>
+	
+</mapper>

@@ -1,0 +1,206 @@
+
+html {
+/* 	margin: 0px 175px; */
+}
+.right-text {
+	font-weight: 800;
+	font-size: 12px;
+	text-align: right;
+	padding: 10px 0px;
+    min-width: 900px;
+    
+}
+
+.userMenu {
+    list-style: none;
+    display: block;
+    
+}
+
+.userMenu > li {
+    float: left;
+    margin-left: 10px;
+    position: relative;
+    left: 900px;
+    /* border: 1px solid red; */
+}
+.sub {
+    /* position: relative; */
+    list-style: none;
+    /* display: none; */
+    position: absolute;
+    padding: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+.userMenu > li:hover .sub {
+    opacity: 1;
+    visibility: visible;
+}
+.sub li {
+    float: none;
+    margin: 0;
+    padding: 0;
+    /* position: absolute; */
+    left: 0;
+    /* width: 100px; */
+    text-align: center;
+}
+
+.main-teme {
+    	/* padding: 50px; */
+        text-align: center;
+        min-width: 1200px;
+        height: 150px;
+        position:relative;
+        
+        
+}
+#body{
+	position:relative;
+	z-index:1
+}
+
+.ksearch1-container {
+    float: left;
+    height: 25px;
+    width: 240px;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: #ffffff;
+    position: relative;
+    margin-top: 5px;
+} 
+.ksearch1-box {
+	font-size: 16px;
+    width: 180px;
+    height: 20px;
+    padding: 0;
+    border: 0px;
+    border-radius: 20px;
+	outLine: none;
+    float: left;
+    border: 1px solid white;
+} 
+.ksearch1-button {
+	/* width: 50px; */
+	cursor: pointer;
+    /* border: 0px; */
+    border: 1px solid white;
+    border-radius: 30px;
+	background: #ffffff;
+	outline: none;
+    position: absolute;
+    margin-left: 28px;
+    margin-top: 3px;
+	/* color: #ffffff; */
+}
+
+/* .container-row2 {
+	display: flex; 
+	flex-direction: row; 
+	flex-wrap: wrap; 
+    justify-content: space-between;
+} */
+
+.gnb {
+    list-style: none;
+    /* display: flex;  */
+	/* flex-direction: row; */
+	/* flex-wrap: wrap; */
+    /* justify-content: space-between; */
+    height: auto;
+    display: block;
+} 
+.gnb > li {
+    float: left;
+    margin: 0px 40px;
+    
+}
+a:link {
+	color: #222831;
+	text-decoration: none;
+}
+a:visited {
+	color: #222831;
+	text-decoration: none;
+}
+.main-navi {
+	padding: 20px 0px;
+	/* text-align: center; */
+	min-width: 840px;
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.kpointer {
+    margin-left: 20px;
+    
+    
+    /* vertical-align: bottom; */
+}
+.kcart {
+    /* vertical-align: bottom; */
+    margin-left: 20px;
+    
+}
+
+.all_sub {
+    list-style: none;
+    position: absolute;
+    padding: 0;
+    visibility: hidden;
+}
+.all_sub li {
+    float: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    left: 0;
+    /* width: 100px; */
+    text-align: left;
+    z-index:2;
+    
+}   
+.gnb > li:hover .all_sub {
+    opacity: 1;
+    visibility: visible;
+    background: #fff;
+    z-index:2;
+    
+} 
+.gnb li {
+	z-index:2;
+}
+.ssub {
+    list-style: none;
+    position: absolute;
+    padding: 0;
+    left: 100%;
+    top: 0;
+    visibility: hidden; 
+}
+.ssub > li {
+    width: 150px;
+    border: 1px solid black;
+}
+
+.all_sub > li:hover .ssub {
+    opacity: 1;
+    visibility: visible;
+    background: #eeeeee;
+    position: absolute;
+
+}
+.ksearch {
+    position: absolute;
+    width: 50%;
+    left: 750px;
+    display: block;
+    margin-top: -8px;
+    
+}
+
+
+
+
