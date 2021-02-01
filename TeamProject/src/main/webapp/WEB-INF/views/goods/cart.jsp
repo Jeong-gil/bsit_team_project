@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
     <%-- head 컨텐트 영역 --%>
 <jsp:include page="/WEB-INF/views/include/header_.jsp" /> 
@@ -544,6 +545,7 @@ zoom: 1.5;
 </style>
 </head>
 <body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -670,6 +672,12 @@ zoom: 1.5;
 </form>
  <%-- footer 영역 --%>
 <jsp:include page="/WEB-INF/views/include/footer_.jsp" />
+
+<script>
+	new Vue({
+		
+	});
+</script>
 
 </body>
 </html>

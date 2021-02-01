@@ -47,16 +47,16 @@
                 <tr>
                     <th scope="row" style="font-size: 16px; color: #666; width: 150px; padding: 25px 8px;">
                         판매단위<br><br>
-                        ${ goodsVo.salesUnit }
+                        중량/용량
                     </th>
                     <th style="font-size: 16px; padding: 25px 0px;">
-                        1팩<br><br>
+                        ${ goodsVo.salesUnit }<br><br>
                         ${ goodsVo.volume }
                     </th>
                 </tr>
                 <tr>
                     <th scope="row" style="font-size: 16px; color: #666; width: 150px; padding: 25px 8px;">
-                        ${ goodsVo.volume }
+                    	배송구분
                     </th>
                     <th style="font-size: 16px; padding: 25px 0px;">
                         ${ goodsVo.delClassification }
@@ -81,11 +81,11 @@
                 </tr>
                 <tr>
                     <th scope="row" style="font-size: 16px; color: #666; width: 150px; padding: 25px 8px;">
-                        ${ goodsVo.shelfLife }<br><br>
+                        유통기한
                     </th>
                     <th style="font-size: 16px; padding: 25px 0px;">
                         출고일 기준, 유통기한 만기 8일 이상 남은 상품을 보내드립니다.(총유통기<br>
-                        한:15일)
+                        한:${ goodsVo.shelfLife })
                     </th>
                 </tr>
                 <tr>
@@ -529,9 +529,9 @@
 
 		
 		filters:{
-			  comma(val){
-			  	return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-			  }
+			comma(val) {
+				return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
 		}
 		
 	});

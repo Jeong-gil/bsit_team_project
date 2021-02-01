@@ -80,7 +80,7 @@ public class MemberController {
 	public String login(
 			@RequestParam(name = "m_id") String mId,
 			String password,
-			@RequestParam(name = "chk_security", required = false) String chkSecurity,
+			@RequestParam(name = "chk_security", defaultValue = "n") String chkSecurity,
 			HttpServletResponse response,
 			HttpSession session) throws IOException 
 	{
