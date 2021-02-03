@@ -6,18 +6,51 @@
 
 	<!-- 회원가입 -->
 	<insert id="addMember">
-		INSERT INTO j_member (id, pw, name, email, tel, address, gender, birthday, push, regDate) 
-		VALUES (#{id}, #{pw}, #{name}, #{email}, #{tel}, #{address}, #{gender}, #{birthday}, #{push}, #{regDate})
+		INSERT INTO jollymember (id, pw, name, email, tel,
+		address, gender, birthday, push, regDate)
+		VALUES (#{id}, #{pw},
+		#{name}, #{email}, #{tel}, #{address}, #{gender},
+		#{birthday}, #{push},
+		#{regDate})
 	</insert>
-	
-	<!-- 아이디 중복확인 >> 아이디가 있으면 1 없으면 0 -->
+
+	<!-- 아이디 중복확인 > 아이디가 있으면 1 없으면 0 -->
 	<select id="getCountById" resultType="int">
-		SELECT COUNT(*) FROM member WHERE id = #{id}
+		SELECT COUNT(*) FROM jollymember
+		WHERE id = #{id}
+	</select>
+
+	<!-- 아이디 찾기 -->
+	<select id="getFindId" resultType="String">
+		SELECT id FROM jollymember
+		WHERE name = #{name} AND email = #{email}
+	</select>
+
+	<!--로그인 -->
+	<select id="userCheck" resultType="String">
+		SELECT pw FROM jollymember
+		WHERE id = #{id}
+	</select>
+
+	<select id="userCheck1" resultType="String">
+		SELECT name from jollymember
+		where id= #{id}
 	</select>
 	
-	<!-- 로그인 -->
-	<select id="getPw" resultType="string">
-		SELECT pw FROM jollymember WHERE id = #{id}
-	</select>
-	
+	<insert id="addRandom">
+      INSERT INTO jolly.random (random) VALUES (#{randomNum})
+   </insert>
+   
+   <select id="getCountRandomNum" resultType="int">
+      SELECT COUNT(*) FROM jolly.random WHERE random = #{randomNum}
+   </select>
+   
+   <delete id="randomTruncate">
+      TRUNCATE jolly.random;
+   </delete>
+   
+   <select id="getCountByPushId" resultType="int">
+      SELECT COUNT(*) FROM jollymember WHERE id = #{id}
+   </select>
+
 </mapper>

@@ -6,12 +6,21 @@
 
 	<!-- 장바구니 단일 상품 제거 -->
 	<delete id="deleteOne">
-		DELETE FROM jolly_cart WHERE (consumer_id = #{consumerID}) AND (goods_name = #{goodsName});
+		DELETE FROM jolly_cart WHERE (consumer_id =
+		#{consumerID}) AND (goods_name = #{goodsName});
 	</delete>
 
 	<!-- 장바구니 추가하기 -->
 	<insert id="addBasket">
-		INSERT INTO jolly_cart (`consumer_id`, `goods_name`, `amount`) VALUES (#{consumerID}, #{goodsName}, #{amount});
+		INSERT INTO jolly_cart (`consumer_id`, `goods_name`,
+		`amount`, `total_price`) VALUES (#{consumerID}, #{goodsName},
+		#{amount}, #{totalPrice});
 	</insert>
-	
+
+	<!-- 회원 장바구니 정보 불러오기 -->
+	<select id="getMemberBasket" resultType="basketVo">
+		SELECT * FROM jolly_cart
+		where consumer_id = #{consumerID};
+	</select>
+
 </mapper>

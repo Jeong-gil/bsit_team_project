@@ -6,11 +6,20 @@
 
 	<!-- 전체 상품 불러오기 -->
 	<select id="getAllGoods" resultType="goodsVo">
-		SELECT * FROM jollygoods ORDER BY upload DESC
+		SELECT * FROM jollygoods
+		ORDER BY upload DESC
 	</select>
-	
+
+	<!-- 선택한 상품 상세정보 불러오기 -->
 	<select id="getProductDetail" resultType="goodsVo">
-		SELECT * FROM jollygoods WHERE goods_name = #{goodsName}
+		SELECT * FROM
+		jollygoods WHERE goods_name = #{goodsName}
 	</select>
 	
+	<insert id="goodsWrite">
+      INSERT INTO jolly.jollygoods (goods_name, sub_goods, main_category, sub_category, sale_price, sales_unit, volume, del_classification, packing_type, allergy, shelf_life, contents1, contents2, upload) 
+      VALUES (#{goodsName}, #{subGoods}, #{mainCategory}, #{subCategory}, #{salePrice}, #{salesUnit}, #{volume}, #{delClassification}, #{packingType}, #{allergy}, #{shelfLife}, #{contents1}, #{contents2}, #{upload})
+   </insert>
+	
+
 </mapper>

@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    
-    <%-- head 컨텐트 영역 --%>
-<jsp:include page="/WEB-INF/views/include/header_.jsp" /> 
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<%-- head 컨텐트 영역 --%>
+<jsp:include page="/WEB-INF/views/include/header_.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,7 @@
 <title>Jolly</title>
 <style type="text/css">
 #main {
- border-bottom: 1px solid #f7f7f7;
+	border-bottom: 1px solid #f7f7f7;
 }
 /* div { */
 /* 	word-break: break-all; */
@@ -24,74 +25,89 @@
 /* padding: 0; */
 /* } */
 body {
-	font-family: noto sans,malgun gothic,AppleGothic,dotum;
+	font-family: noto sans, malgun gothic, AppleGothic, dotum;
 	line-height: 1;
 	letter-spacing: -.05em;
 	color: #4c4c4c;
 	font-size: 12px;
 	max-width: 100%;
 }
-#content{
+
+#content {
 	min-width: 1050px;
 	padding-bottom: 120px;
 }
+
 #content {
 	position: relative;
 }
+
 element.style {
 	min-height: 563px;
 }
+
 .only_pc {
-/* 	width: 1050px; */
+	/* 	width: 1050px; */
 	margin: 100px;
 }
+
 .only_pc .cart_item {
 	float: left;
 	width: 742px;
 }
+
 .cart_item .no_item {
 	overflow: visible;
 }
+
 .only_pc * {
 	font-family: Noto Sans;
 	letter-spacing: 0;
 }
+
 .cart_item {
 	position: relative;
 	z-index: 1;
 }
-.only_pc .empty .cart_result,
-.only_pc .empty .cart_select {
+
+.only_pc .empty .cart_result, .only_pc .empty .cart_select {
 	display: block;
 }
+
 .only_pc .cart_select {
 	position: static;
 	height: auto;
 }
+
 .cart_select {
 	z-index: 2;
 }
+
 .only_pc .cart_select
 .inner_select {
 	position: static;
 	padding: 0 10px 0 2px;
 	border-bottom: none;
 }
+
 .cart_select .inner_select {
 	overflow: hidden;
 	left: 0;
 	top: 0;
 	width: 100%;
 }
+
 .only_pc .cart_select .check {
 	padding: 18px 0 17px;
 	font-weight: 700;
 	font-size: 14px;
 	letter-spacing: -.3px;
 }
+
 .cart_select .check {
 	float: left;
 }
+
 label {
 	line-height: 24px;
 }
@@ -142,38 +158,43 @@ label {
 /*     line-height: 24px; */
 /* } */
 a {
-    background-color: transparent;
-    text-decoration: none;
-    color: inherit;
+	background-color: transparent;
+	text-decoration: none;
+	color: inherit;
 }
+
 .only_pc .empty .inner_empty {
-    border-top: 1px solid #333;
-    border-bottom: 1px solid #f4f4f4;
+	border-top: 1px solid #333;
+	border-bottom: 1px solid #f4f4f4;
 }
+
 .only_pc .empty .inner_empty .bg {
-    display: none;
+	display: none;
 }
+
 .empty .inner_empty .bg {
-    display: block;
-    height: 10px;
-    border-top: 1px solid #ccc;
-    background-color: #f4f4f4;
+	display: block;
+	height: 10px;
+	border-top: 1px solid #ccc;
+	background-color: #f4f4f4;
 }
+
 .only_pc .empty .inner_empty .txt {
-    width: 100%;
-    margin-top: 0;
-    padding: 115px 0 116px;
-    font-weight: 700;
-    font-size: 16px;
-    color: #333;
+	width: 100%;
+	margin-top: 0;
+	padding: 115px 0 116px;
+	font-weight: 700;
+	font-size: 16px;
+	color: #333;
 }
+
 .empty .inner_empty .txt {
-    width: 100%;
-    margin-top: 49%;
-    font-size: 16px;
-    color: #999;
-    line-height: 24px;
-    text-align: center;
+	width: 100%;
+	margin-top: 49%;
+	font-size: 16px;
+	color: #999;
+	line-height: 24px;
+	text-align: center;
 }
 /* .only_pc .empty .inner_empty .btn_submit { */
 /*     display: none; */
@@ -208,32 +229,36 @@ a {
 /*     cursor: default; */
 /* } */
 .only_pc .empty .cart_result, .only_pc .empty .cart_select {
-    display: block;
+	display: block;
 }
+
 .only_pc .cart_select {
-    position: static;
-    height: auto;
+	position: static;
+	height: auto;
 }
+
 .only_pc .cart_select .inner_select {
-    position: static;
-    padding: 0 10px 0 2px;
-    border-bottom: none;
+	position: static;
+	padding: 0 10px 0 2px;
+	border-bottom: none;
 }
+
 .cart_select .inner_select {
-    overflow: hidden;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    padding: 0 20px;
-    border-bottom: 1px solid #ccc;
-    background-color: #fff;
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	padding: 0 20px;
+	border-bottom: 1px solid #ccc;
+	background-color: #fff;
 }
+
 .only_pc .cart_select .check {
-    padding: 18px 0 17px;
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: -.3px;
+	padding: 18px 0 17px;
+	font-weight: 700;
+	font-size: 14px;
+	letter-spacing: -.3px;
 }
 /* button[disabled], html input[disabled] { */
 /*     cursor: default; */
@@ -282,62 +307,70 @@ a {
 /*     line-height: 24px; */
 /* } */
 .only_pc .empty .cart_result, .only_pc .empty .cart_select {
-    display: block;
+	display: block;
 }
+
 .only_pc .cart_result {
-    position: relative;
-    float: right;
-    width: 284px;
+	position: relative;
+	float: right;
+	width: 284px;
 }
 /* element.style { */
 /*     top: 60px; */
 /* } */
 .only_pc .cart_result .inner_result {
-    position: absolute;
-    right: 0;
-    top: 60px;
-    width: 284px;
-    background-color: #fff;
+	position: absolute;
+	right: 0;
+	top: 60px;
+	width: 284px;
+	background-color: #fff;
 }
+
 .only_pc .cart_delivery {
-    padding: 23px 19px 20px;
-    border: 1px solid #f2f2f2;
-    border-bottom: 0;
+	padding: 23px 19px 20px;
+	border: 1px solid #f2f2f2;
+	border-bottom: 0;
 }
+
 .cart_delivery {
-    position: relative;
-    z-index: 3;
+	position: relative;
+	z-index: 3;
 }
+
 .only_pc .cart_delivery .tit {
-    padding-left: 24px;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 20px;
-    letter-spacing: -.3px;
-    background-image: url(https://res.kurly.com/pc/service/cart/2007/ico_location.svg);
-    background-color: transparent;
-    background-repeat: no-repeat;
-    background-size: 20px 20px;
-    background-position: 0 50%;
+	padding-left: 24px;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 20px;
+	letter-spacing: -.3px;
+	background-image:
+		url(https://res.kurly.com/pc/service/cart/2007/ico_location.svg);
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-size: 20px 20px;
+	background-position: 0 50%;
 }
+
 .only_pc .cart_delivery .no_address {
-    position: static;
-    padding: 11px 0 0;
-    font-weight: 700;
-    font-size: 16px;
-    color: #333;
-    line-height: 24px;
+	position: static;
+	padding: 11px 0 0;
+	font-weight: 700;
+	font-size: 16px;
+	color: #333;
+	line-height: 24px;
 }
+
 .cart_delivery .no_address {
-    display: block;
-    position: relative;
-    padding: 12px 20px;
-    font-size: 16px;
-    color: #5f0080;
-    line-height: 20px;
+	display: block;
+	position: relative;
+	padding: 12px 20px;
+	font-size: 16px;
+	color: #5f0080;
+	line-height: 20px;
 }
+
 .only_pc .cart_delivery .no_address .emph {
-    color: #5f0080;
+	color: #5f0080;
 }
 /* .only_pc .cart_delivery .no_address .btn { */
 /*     margin-top: 17px; */
@@ -368,69 +401,82 @@ a {
 /*     vertical-align: -5px; */
 /* } */
 .only_pc .amount_view {
-    padding: 9px 18px 18px 20px;
-    border: 1px solid #f2f2f2;
-    background-color: #fafafa;
+	padding: 9px 18px 18px 20px;
+	border: 1px solid #f2f2f2;
+	background-color: #fafafa;
 }
+
 .amount_view {
-    padding: 13px 20px 90px;
-    border-top: 10px solid #f4f4f4;
-    --safe-area-inset-bottom: env(safe-area-inset-bottom);
-    padding-bottom: calc(90px + var(--safe-area-inset-bottom));
+	padding: 13px 20px 90px;
+	border-top: 10px solid #f4f4f4; -
+	-safe-area-inset-bottom: env(safe-area-inset-bottom);
+	padding-bottom: calc(90px + var(- -safe-area-inset-bottom));
 }
+
 .only_pc .amount_view .amount {
-    padding-top: 9px;
+	padding-top: 9px;
 }
+
 .amount_view .amount {
-    overflow: hidden;
-    padding-top: 9px;
+	overflow: hidden;
+	padding-top: 9px;
 }
+
 .only_pc .amount_view .amount .tit {
-    float: left;
-    width: 96px;
-    font-weight: 400;
-    letter-spacing: -.5px;
+	float: left;
+	width: 96px;
+	font-weight: 400;
+	letter-spacing: -.5px;
 }
+
 .amount_view .amount .tit {
-    float: left;
-    width: 90px;
-    font-size: 16px;
-    line-height: 24px;
-    white-space: nowrap;
+	float: left;
+	width: 90px;
+	font-size: 16px;
+	line-height: 24px;
+	white-space: nowrap;
 }
+
 .only_pc .amount_view .amount .price {
-    float: right;
+	float: right;
 }
+
 .amount_view .amount .price {
-    float: right;
-    line-height: 24px;
-    text-align: right;
+	float: right;
+	line-height: 24px;
+	text-align: right;
 }
+
 .only_pc .amount_view .amount .price .num {
-    letter-spacing: -.5px;
+	letter-spacing: -.5px;
 }
+
 .amount_view .amount .price .num {
-    font-size: 18px;
+	font-size: 18px;
 }
+
 .amount_view .amount .price .won {
-    padding-left: 2px;
-    font-size: 16px;
-    vertical-align: 1px;
+	padding-left: 2px;
+	font-size: 16px;
+	vertical-align: 1px;
 }
+
 .only_pc .amount_view .amount.lst {
-    margin: 17px 0 0;
-    padding-top: 17px;
-    border-top: 1px solid #eee;
+	margin: 17px 0 0;
+	padding-top: 17px;
+	border-top: 1px solid #eee;
 }
+
 .only_pc .amount_view .reserve {
-    padding-top: 9px;
+	padding-top: 9px;
 }
+
 .amount_view .reserve {
-    padding-top: 6px;
-    font-size: 12px;
-    color: #666;
-    line-height: 16px;
-    text-align: right;
+	padding-top: 6px;
+	font-size: 12px;
+	color: #666;
+	line-height: 16px;
+	text-align: right;
 }
 /* .only_pc .btn_submit { */
 /*     position: static; */
@@ -508,172 +554,190 @@ a {
 /*     margin: 0; */
 /* } */
 .only_pc .cart_result .notice {
-    padding-top: 34px;
+	padding-top: 34px;
 }
 
 .only_pc * {
-    font-family: Noto Sans;
-    letter-spacing: 0;
+	font-family: Noto Sans;
+	letter-spacing: 0;
 }
 /* div, th, td, li, dt, dd, p { */
 /*     word-break: break-all; */
 /* } */
 *, *:after, *:before {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
+
 .only_pc .cart_result .notice .txt {
-    display: block;
-    position: relative;
-    padding: 6px 0 0 10px;
-    font-size: 12px;
-    color: #666;
-    line-height: 18px;
-    letter-spacing: -.5px;
+	display: block;
+	position: relative;
+	padding: 6px 0 0 10px;
+	font-size: 12px;
+	color: #666;
+	line-height: 18px;
+	letter-spacing: -.5px;
 }
+
 .only_pc .cart_result .notice .txt .ico {
-    position: absolute;
-    left: 0;
-    top: 6px;
+	position: absolute;
+	left: 0;
+	top: 6px;
 }
+
 input[type=checkbox] {
-zoom: 1.5;
+	zoom: 1.5;
 }
 </style>
 </head>
 <body>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/js/bootstrap.min.js"></script>
-<form>
-<div id="main">
-<div id="content">
-	<div id="cartItemList" class="only_pc" style="min-height: 563px;">
-		<div class="empty">
-			<div class="row" style="min-width: 1400px;">
-		        <div class="col-lg-9">
-       				<table class="table">
-					    <thead>
-					        <tr>
-					            <th style="width: 20px"><input type="checkbox"></th>
-					            <th style="font-size: 17px; font-weight: 700;">전체선택 (0/0)</th>
-					            <th style="font-size: 17px; font-weight: 700;" colspan="3">선택삭제</th>
-					        </tr>
-					    </thead>
-					    <tbody>
-					        <tr>
-					            <th style="vertical-align: middle;"><input type="checkbox"></th>
-					            <th>
-					            	<img src="/images/raisins-5822867_1920(건포도).jpg" style="width: 70px; height: 90px; object-fit: cover;" alt="">
-					            </th>
-					            <th style="vertical-align: middle; font-size: 19px; font-weight: 700;">
-					            	[타마루제면소] 마제소바 (2인분)
-					            </th>
-					            <th style="padding: 25px 0px;">
-			                        <input type="number" readonly style="height: 30px; width: 80px; text-align: center; font-size: 15px;" v-model="amount">
-			                        <div class="btn-group" role="group" aria-label="...">
-			                            <button type="button" class="btn btn-default" v-on:click="decreaseQuantity">➖</button>
-			                            <button type="button" class="btn btn-default" v-on:click="increaseQuantity">➕</button>
-			                        </div>
-			                    </th>
-			                    <th style="vertical-align: middle; font-weight: 700; font-size: 20px; text-align: right;">
-			                    	14,700원
-			                    	<button type="button" class="btn btn-default">X</button>
-			                    </th>
-					        </tr>
-					        <tr>
-					            <th style="vertical-align: middle;"><input type="checkbox"></th>
-					            <th>
-					            	<img src="/images/raisins-5822867_1920(건포도).jpg" style="width: 70px; height: 90px; object-fit: cover;" alt="">
-					            </th>
-					            <th style="vertical-align: middle; font-size: 19px; font-weight: 700;">
-					            	[타마루제면소] 마제소바 (2인분)
-					            </th>
-					            <th style="padding: 25px 0px;">
-			                        <input type="number" readonly style="height: 30px; width: 80px; text-align: center; font-size: 15px;" v-model="amount">
-			                        <div class="btn-group" role="group" aria-label="...">
-			                            <button type="button" class="btn btn-default" v-on:click="decreaseQuantity">➖</button>
-			                            <button type="button" class="btn btn-default" v-on:click="increaseQuantity">➕</button>
-			                        </div>
-			                    </th>
-			                    <th style="vertical-align: middle; font-weight: 700; font-size: 20px; text-align: right;">
-			                    	14,700원
-			                    	<button type="button" class="btn btn-default">X</button>
-			                    </th>
-					        </tr>
-					    </tbody>
-					</table>
-		        </div>
-		        <div class="col-lg-3">
-		        	<div class="cart_result">
-						<div class="inner_result" style="top: 60px;">
-							<div class="cart_delivery">
-								<h3 class="tit">배송지</h3>
-								<div class="no_address">
-									<span class="emph">배송지를 입력</span>하고
-									<br>배송유형을 확인해 보세요!
-									<a href="#" class="btn default">
-										<span class="ico"></span>주소 검색
-									</a>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="/js/bootstrap.min.js"></script>
+	<form>
+		<div id="main">
+			<div id="content">
+				<div id="cartItemList" class="only_pc" style="min-height: 563px;">
+					<div class="empty">
+						<div class="row" style="min-width: 1400px;">
+							<div class="col-lg-9">
+								<table class="table">
+									<thead>
+										<tr>
+											<th style="width: 20px"><input type="checkbox"></th>
+											<th style="font-size: 17px; font-weight: 700;">전체선택
+												(0/0)</th>
+											<th style="font-size: 17px; font-weight: 700;" colspan="3">선택삭제</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="basketVo" items="${ basketVos }">
+											<script>
+								console.log('basketVos: ' + basketVos);
+					    	</script>
+											<tr>
+												<th style="vertical-align: middle;"><input
+													type="checkbox"></th>
+												<th><img src="/images/raisins-5822867_1920(건포도).jpg"
+													style="width: 70px; height: 90px; object-fit: cover;"
+													alt=""></th>
+												<th
+													style="vertical-align: middle; font-size: 19px; font-weight: 700;">
+													${ basketVo.goodsName }</th>
+												<th style="padding: 25px 0px;"><input type="number"
+													readonly
+													style="height: 30px; width: 80px; text-align: center; font-size: 15px;"
+													v-model="amount">
+													<div class="btn-group" role="group" aria-label="...">
+														<button type="button" class="btn btn-default"
+															v-on:click="decreaseQuantity">➖</button>
+														<button type="button" class="btn btn-default"
+															v-on:click="increaseQuantity">➕</button>
+													</div></th>
+												<th
+													style="vertical-align: middle; font-weight: 700; font-size: 20px; text-align: right;">
+													${ basketVo.totalPrice }
+													<button type="button" class="btn btn-default">X</button>
+												</th>
+											</tr>
+										</c:forEach>
+
+										<tr>
+											<th style="vertical-align: middle;"><input
+												type="checkbox"></th>
+											<th><img src="/images/raisins-5822867_1920(건포도).jpg"
+												style="width: 70px; height: 90px; object-fit: cover;" alt="">
+											</th>
+											<th
+												style="vertical-align: middle; font-size: 19px; font-weight: 700;">
+												[타마루제면소] 마제소바 (2인분)</th>
+											<th style="padding: 25px 0px;"><input type="number"
+												readonly
+												style="height: 30px; width: 80px; text-align: center; font-size: 15px;"
+												v-model="amount">
+												<div class="btn-group" role="group" aria-label="...">
+													<button type="button" class="btn btn-default"
+														v-on:click="decreaseQuantity">➖</button>
+													<button type="button" class="btn btn-default"
+														v-on:click="increaseQuantity">➕</button>
+												</div></th>
+											<th
+												style="vertical-align: middle; font-weight: 700; font-size: 20px; text-align: right;">
+												14,700원
+												<button type="button" class="btn btn-default">X</button>
+											</th>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="col-lg-3">
+								<div class="cart_result">
+									<div class="inner_result" style="top: 60px;">
+										<div class="cart_delivery">
+											<h3 class="tit">배송지</h3>
+											<div class="no_address">
+												<span class="emph">배송지를 입력</span>하고 <br>배송유형을 확인해 보세요!
+												<a href="#" class="btn default"> <span class="ico"></span>주소
+													검색
+												</a>
+											</div>
+										</div>
+										<div class="amount_view">
+											<dl class="amount">
+												<dt class="tit">상품금액</dt>
+												<dd class="price">
+													<span class="num">0</span><span class="won">원</span>
+												</dd>
+											</dl>
+											<dl class="amount">
+												<dt class="tit">상품할인금액</dt>
+												<dd class="price">
+													<span class="num">0</span><span class="won">원</span>
+												</dd>
+											</dl>
+											<dl class="amount">
+												<dt class="tit">배송비</dt>
+												<dd class="price">
+													<span class="num">0</span><span class="won">원</span>
+												</dd>
+											</dl>
+											<dl class="amount lst">
+												<dt class="tit">결제예정금액</dt>
+												<dd class="price">
+													<span class="num">0</span><span class="won">원</span>
+												</dd>
+											</dl>
+											<div class="reserve"></div>
+										</div>
+										<div class="btn_submit">
+											<button type="submit" class="btn disabled">상품을 담아주세요</button>
+										</div>
+										<div class="notice">
+											<span class="txt"> <span class="ico">·</span>‘입금확인’
+												상태일 때는 주문 내역 상세에서 직접 주문취소가 가능합니다.
+											</span> <span class="txt"> <span class="ico">·</span>‘입금확인’
+												이후 상태에는 고객센터로 문의해주세요.
+											</span>
+										</div>
+									</div>
 								</div>
-							</div>
-							<div class="amount_view">
-								<dl class="amount">
-									<dt class="tit">상품금액</dt>
-									<dd class="price">
-										<span class="num">0</span><span class="won">원</span>
-									</dd>
-								</dl>
-								<dl class="amount">
-									<dt class="tit">상품할인금액</dt>
-									<dd class="price">
-										<span class="num">0</span><span class="won">원</span>
-									</dd>
-								</dl>
-								<dl class="amount">
-									<dt class="tit">배송비</dt>
-									<dd class="price">
-										<span class="num">0</span><span class="won">원</span>
-									</dd>
-								</dl>
-								<dl class="amount lst">
-									<dt class="tit">결제예정금액</dt>
-									<dd class="price">
-										<span class="num">0</span><span class="won">원</span>
-									</dd>
-								</dl>
-								<div class="reserve"></div>
-							</div>
-							<div class="btn_submit">
-								<button type="submit" class="btn disabled">상품을 담아주세요</button>
-							</div>
-							<div class="notice">
-								<span class="txt">
-									<span class="ico">·</span>‘입금확인’ 상태일 때는
-									주문 내역 상세에서 직접 주문취소가 가능합니다.
-								</span>
-								<span class="txt">
-									<span	class="ico">·</span>‘입금확인’ 이후 상태에는 고객센터로 문의해주세요.
-								</span>
 							</div>
 						</div>
 					</div>
-		        </div>
-        	</div>
+				</div>
+			</div>
 		</div>
-	</div>
-</div>
-</div>
-</form>
- <%-- footer 영역 --%>
-<jsp:include page="/WEB-INF/views/include/footer_.jsp" />
+	</form>
+	<%-- footer 영역 --%>
+	<jsp:include page="/WEB-INF/views/include/footer_.jsp" />
 
-<script>
+	<script>
 	new Vue({
 		
 	});

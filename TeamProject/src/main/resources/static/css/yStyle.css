@@ -28,14 +28,14 @@
 	flex-wrap: wrap;
 	justify-content: flex-start;
 	align-content: flex-start;
-/* 	align-items: center; */
+	/* 	align-items: center; */
 }
 
 .y_item {
 	width: 250px;
 	height: 350px;
 	margin: 20px 10px;
-/* 	border: 1px solid green; */
+	/* 	border: 1px solid green; */
 	background: #f1ae89;
 }
 
