@@ -33,7 +33,7 @@ public class basketAjax {
 	{
 		String consumerID = (String) session.getAttribute("id");
 		
-		basketService.addBasket(consumerID, (String) params.get("goodsName"), (int) params.get("amount"), (int) params.get("totalPrice"));
+		basketService.addBasket(consumerID, (String) params.get("goodsName"), (int) params.get("amount"));
 	}
 	
 }

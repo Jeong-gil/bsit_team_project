@@ -155,8 +155,10 @@ public class MemberController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<String> login(String id, String pw, @RequestParam(defaultValue = "false") boolean keepLogin,
+	public ResponseEntity<String> login(String id, String pw, @RequestParam(name = "chk_security", defaultValue = "false") boolean keepLogin,
 			HttpSession session, HttpServletResponse response) {
+		
+		System.out.println("keepLogin: " + keepLogin);
 
 		String name = memberService.userCheck1(id);
 
@@ -183,8 +185,13 @@ public class MemberController {
 			Cookie cookie = new Cookie("id", id);
 			cookie.setMaxAge(60 * 10);
 			cookie.setPath("/");
+			
+			Cookie cookie2 = new Cookie("name", name);
+			cookie2.setMaxAge(60 * 10);
+			cookie2.setPath("/");
 
 			response.addCookie(cookie);
+			response.addCookie(cookie2);
 		}
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Location", "/"); // 리다이렉트 경로를 Location으로 설정
@@ -253,11 +260,16 @@ public class MemberController {
 
 	@GetMapping("/cart")
 	public String cart(@RequestParam(name = "id") String consumerID, Model model) {
+		
+		Gson gson = new Gson();
 
-		List<BasketVo> basketVos = basketService.getMemberBasket(consumerID);
-		model.addAttribute("basketVos", basketVos);
+		List<BasketVo> basketVoList = basketService.getMemberBasket(consumerID);
+		
+		String strbasketVos = gson.toJson(basketVoList);
+		
+		model.addAttribute("strbasketVos", strbasketVos);
 
-		System.out.println("basketVos: " + basketVos);
+		System.out.println("strbasketVos: " + strbasketVos);
 
 		return "/goods/cart";
 

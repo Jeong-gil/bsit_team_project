@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- head 컨텐트 영역 --%>
 <jsp:include page="/WEB-INF/views/include/header_.jsp" />
 
@@ -33,8 +34,20 @@
 
 	<div class="row" style="min-width: 1300px;">
 		<div class="col-lg-5">
-			<img src="/images/raisins-5822867_1920(건포도).jpg"
-				style="width: 500px; height: 650px; object-fit: cover;" alt="">
+			<c:if test="${ not empty attachList }">
+				<c:forEach var="attach" items="${ attachList }">
+					<c:choose>
+						<c:when test="${ attach.image eq 'I' }">
+							<c:choose>
+								<c:when test="${ attach.main eq 'O' }">
+									<img src="/upload/${ attach.uploadpath }/${ attach.uuid }_${ attach.filename1 }"
+									style="width: 500px; height: 650px; object-fit: cover;" alt="">
+								</c:when>
+							</c:choose>
+						</c:when>
+					</c:choose>
+				</c:forEach>
+			</c:if>
 		</div>
 		<div class="col-lg-7">
 			<table class="table" id="y_product_table">
@@ -136,7 +149,7 @@
 	<div class="container">
 
 		<!--   <div class="clearfix"></div> -->
-		<h4>탭형 네비게이션 양쪽 정렬</h4>
+		
 		<ul class="nav nav-tabs nav-justified" id="t1">
 			<li class="active" onclick="fnMove('1')"><a href="#"
 				onclick="return false;">메뉴1</a></li>
@@ -144,91 +157,14 @@
 			<li onclick="fnMove('3')"><a href="#" onclick="return false;">메뉴3</a></li>
 			<li onclick="fnMove('4')"><a href="#" onclick="return false;">메뉴4</a></li>
 		</ul>
-		<div style="background: aqua;">[32] Sed ut perspiciatis, unde
-			omnis iste natus error sit voluptatem accusantium doloremque
-			laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore
-			veritatis et quasi architecto beatae vitae dicta sunt, explicabo.
-			Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit
-			aut fugit, sed quia consequuntur magni dolores eos, qui ratione
-			voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem
-			ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia
-			non numquam eius modi tempora incidunt, ut labore et dolore magnam
-			aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-			exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex
-			ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in
-			ea voluptate velit esse, quam nihil molestiae consequatur, vel illum,
-			qui dolorem eum fugiat, quo voluptas nulla pariatur? [33] At vero eos
-			et accusamus et iusto odio dignissimos ducimus, qui blanditiis
-			praesentium voluptatum deleniti atque corrupti, quos dolores et quas
-			molestias excepturi sint, obcaecati cupiditate non provident,
-			similique sunt in culpa, qui officia deserunt mollitia animi, id est
-			laborum et dolorum fuga. Et harum quidem rerum facilis est et
-			expedita distinctio. Nam libero tempore, cum soluta nobis est
-			eligendi optio, cumque nihil impedit, quo minus id, quod maxime
-			placeat, facere possimus, omnis voluptas assumenda est, omnis dolor
-			repellendus. Temporibus autem quibusdam et aut officiis debitis aut
-			rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint
-			et molestiae non recusandae. Itaque earum rerum hic tenetur a
-			sapiente delectus, ut aut reiciendis voluptatibus maiores alias
-			consequatur aut perferendis doloribus asperiores repellat. [32] Sed
-			ut perspiciatis, unde omnis iste natus error sit voluptatem
-			accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae
-			ab illo inventore veritatis et quasi architecto beatae vitae dicta
-			sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit,
-			aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-			eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est,
-			qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit,
-			sed quia non numquam eius modi tempora incidunt, ut labore et dolore
-			magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
-			nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
-			aliquid ex ea commodi consequatur? Quis autem vel eum iure
-			reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae
-			consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla
-			pariatur? [33] At vero eos et accusamus et iusto odio dignissimos
-			ducimus, qui blanditiis praesentium voluptatum deleniti atque
-			corrupti, quos dolores et quas molestias excepturi sint, obcaecati
-			cupiditate non provident, similique sunt in culpa, qui officia
-			deserunt mollitia animi, id est laborum et dolorum fuga. Et harum
-			quidem rerum facilis est et expedita distinctio. Nam libero tempore,
-			cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus
-			id, quod maxime placeat, facere possimus, omnis voluptas assumenda
-			est, omnis dolor repellendus. Temporibus autem quibusdam et aut
-			officiis debitis aut rerum necessitatibus saepe eveniet, ut et
-			voluptates repudiandae sint et molestiae non recusandae. Itaque earum
-			rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus
-			maiores alias consequatur aut perferendis doloribus asperiores
-			repellat. [32] Sed ut perspiciatis, unde omnis iste natus error sit
-			voluptatem accusantium doloremque laudantium, totam rem aperiam eaque
-			ipsa, quae ab illo inventore veritatis et quasi architecto beatae
-			vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia
-			voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur
-			magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro
-			quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur,
-			adipisci velit, sed quia non numquam eius modi tempora incidunt, ut
-			labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
-			veniam, quis nostrum exercitationem ullam corporis suscipit
-			laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel
-			eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil
-			molestiae consequatur, vel illum, qui dolorem eum fugiat, quo
-			voluptas nulla pariatur? [33] At vero eos et accusamus et iusto odio
-			dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti
-			atque corrupti, quos dolores et quas molestias excepturi sint,
-			obcaecati cupiditate non provident, similique sunt in culpa, qui
-			officia deserunt mollitia animi, id est laborum et dolorum fuga. Et
-			harum quidem rerum facilis est et expedita distinctio. Nam libero
-			tempore, cum soluta nobis est eligendi optio, cumque nihil impedit,
-			quo minus id, quod maxime placeat, facere possimus, omnis voluptas
-			assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et
-			aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et
-			voluptates repudiandae sint et molestiae non recusandae. Itaque earum
-			rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus
-			maiores alias consequatur aut perferendis doloribus asperiores
-			repellat.</div>
+		<div>
+		${ goodsVo.contents1 }
+		</div>
 	</div>
 	<div class="container">
 
 		<!--   <div class="clearfix"></div> -->
-		<h4>탭형 네비게이션 양쪽 정렬</h4>
+		
 		<ul class="nav nav-tabs nav-justified" id="t2">
 			<li onclick="fnMove('1')"><a href="#" onclick="return false;">메뉴1</a></li>
 			<li class="active" onclick="fnMove('2')"><a href="#"
@@ -236,91 +172,14 @@
 			<li onclick="fnMove('3')"><a href="#" onclick="return false;">메뉴3</a></li>
 			<li onclick="fnMove('4')"><a href="#" onclick="return false;">메뉴4</a></li>
 		</ul>
-		<div style="background: black;">[32] Sed ut perspiciatis, unde
-			omnis iste natus error sit voluptatem accusantium doloremque
-			laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore
-			veritatis et quasi architecto beatae vitae dicta sunt, explicabo.
-			Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit
-			aut fugit, sed quia consequuntur magni dolores eos, qui ratione
-			voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem
-			ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia
-			non numquam eius modi tempora incidunt, ut labore et dolore magnam
-			aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-			exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex
-			ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in
-			ea voluptate velit esse, quam nihil molestiae consequatur, vel illum,
-			qui dolorem eum fugiat, quo voluptas nulla pariatur? [33] At vero eos
-			et accusamus et iusto odio dignissimos ducimus, qui blanditiis
-			praesentium voluptatum deleniti atque corrupti, quos dolores et quas
-			molestias excepturi sint, obcaecati cupiditate non provident,
-			similique sunt in culpa, qui officia deserunt mollitia animi, id est
-			laborum et dolorum fuga. Et harum quidem rerum facilis est et
-			expedita distinctio. Nam libero tempore, cum soluta nobis est
-			eligendi optio, cumque nihil impedit, quo minus id, quod maxime
-			placeat, facere possimus, omnis voluptas assumenda est, omnis dolor
-			repellendus. Temporibus autem quibusdam et aut officiis debitis aut
-			rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint
-			et molestiae non recusandae. Itaque earum rerum hic tenetur a
-			sapiente delectus, ut aut reiciendis voluptatibus maiores alias
-			consequatur aut perferendis doloribus asperiores repellat. [32] Sed
-			ut perspiciatis, unde omnis iste natus error sit voluptatem
-			accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae
-			ab illo inventore veritatis et quasi architecto beatae vitae dicta
-			sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit,
-			aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-			eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est,
-			qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit,
-			sed quia non numquam eius modi tempora incidunt, ut labore et dolore
-			magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
-			nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
-			aliquid ex ea commodi consequatur? Quis autem vel eum iure
-			reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae
-			consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla
-			pariatur? [33] At vero eos et accusamus et iusto odio dignissimos
-			ducimus, qui blanditiis praesentium voluptatum deleniti atque
-			corrupti, quos dolores et quas molestias excepturi sint, obcaecati
-			cupiditate non provident, similique sunt in culpa, qui officia
-			deserunt mollitia animi, id est laborum et dolorum fuga. Et harum
-			quidem rerum facilis est et expedita distinctio. Nam libero tempore,
-			cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus
-			id, quod maxime placeat, facere possimus, omnis voluptas assumenda
-			est, omnis dolor repellendus. Temporibus autem quibusdam et aut
-			officiis debitis aut rerum necessitatibus saepe eveniet, ut et
-			voluptates repudiandae sint et molestiae non recusandae. Itaque earum
-			rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus
-			maiores alias consequatur aut perferendis doloribus asperiores
-			repellat. [32] Sed ut perspiciatis, unde omnis iste natus error sit
-			voluptatem accusantium doloremque laudantium, totam rem aperiam eaque
-			ipsa, quae ab illo inventore veritatis et quasi architecto beatae
-			vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia
-			voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur
-			magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro
-			quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur,
-			adipisci velit, sed quia non numquam eius modi tempora incidunt, ut
-			labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
-			veniam, quis nostrum exercitationem ullam corporis suscipit
-			laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel
-			eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil
-			molestiae consequatur, vel illum, qui dolorem eum fugiat, quo
-			voluptas nulla pariatur? [33] At vero eos et accusamus et iusto odio
-			dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti
-			atque corrupti, quos dolores et quas molestias excepturi sint,
-			obcaecati cupiditate non provident, similique sunt in culpa, qui
-			officia deserunt mollitia animi, id est laborum et dolorum fuga. Et
-			harum quidem rerum facilis est et expedita distinctio. Nam libero
-			tempore, cum soluta nobis est eligendi optio, cumque nihil impedit,
-			quo minus id, quod maxime placeat, facere possimus, omnis voluptas
-			assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et
-			aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et
-			voluptates repudiandae sint et molestiae non recusandae. Itaque earum
-			rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus
-			maiores alias consequatur aut perferendis doloribus asperiores
-			repellat.</div>
+		<div>
+		${ goodsVo.contents2 }
+		</div>
 	</div>
 	<div id="review" class="container">
 
 		<!--   <div class="clearfix"></div> -->
-		<h4>탭형 네비게이션 양쪽 정렬</h4>
+		
 		<ul class="nav nav-tabs nav-justified" id="t3">
 			<li onclick="fnMove('1')"><a href="#" onclick="return false;">메뉴1</a></li>
 			<li onclick="fnMove('2')"><a href="#" onclick="return false;">메뉴2</a></li>
@@ -398,7 +257,7 @@
 	<div class="container">
 
 		<!--   <div class="clearfix"></div> -->
-		<h4>탭형 네비게이션 양쪽 정렬</h4>
+		
 		<ul class="nav nav-tabs nav-justified" id="t4">
 			<li onclick="fnMove('1')"><a href="#" onclick="return false;">메뉴1</a></li>
 			<li onclick="fnMove('2')"><a href="#" onclick="return false;">메뉴2</a></li>
@@ -521,8 +380,6 @@
 	<script>
 	new Vue({
 		el: '#y_product_table',
-
-		
 		data: {
 			amount: 0,
 			price: 0

@@ -12,4 +12,7 @@ public class JNoticeVo {
    private String content;
    private Timestamp regDate;
    private int readcount;
+   private int reRef;
+   private int reLev;
+   private int reSeq;
 }

@@ -5,8 +5,16 @@
 <mapper namespace="com.example.mapper.AttachMapper">
 
 	<insert id="insertAttach">
-		INSERT INTO jolly.attach (uuid, filename1, uploadpath, image, no_num)
-		VALUES (#{uuid}, #{filename1}, #{uploadpath}, #{image}, #{noNum})
+		INSERT INTO jolly.attach (uuid, filename1, uploadpath, image, attach_name, main)
+		VALUES (#{uuid}, #{filename1}, #{uploadpath}, #{image}, #{attachName}, #{main})
 	</insert>
+	
+	<select id="getAttachesByName" resultType="attachVo">
+		SELECT * FROM attach WHERE attach_name = #{attachName}
+	</select>
+	
+	<delete id="deleteAttachesByName">
+		DELETE FROM attach where attach_name = #{goodsName}
+	</delete>
 
 </mapper>

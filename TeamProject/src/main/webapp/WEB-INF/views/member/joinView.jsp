@@ -1,6 +1,6 @@
 <%@page import="java.util.Random"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
 <%-- head 컨텐트 영역 --%>
 <jsp:include page="/WEB-INF/views/include/header_.jsp" />
@@ -15,226 +15,225 @@
 
 </head>
 <body class="member_join">
-   <div id="main">
-      <div id="content">
-         <div class="page_aticle">
-            <div class="type_form member_join ">
-               <form id="form" action="/member/joinView" method="post" name="frm"
-                  id="form">
-                  <div class="field_head">
-                     <h3 class="tit">회원가입</h3>
-                     <p class="sub1">
-                        <span class="ico">*</span>필수입력사항
-                     </p>
-                  </div>
-                  <table class="tbl_comm">
-                     <tbody>
-                        <tr id="idTr">
-                           <th class="fst">아이디 <span class="ico">*</span>
-                           </th>
-                           <td><input type="text" name="id" maxlength="16"
-                              placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합" id="left"
-                              v-model="inputIdVal" required> <a href="#"
-                              class="btn default" v-on:click="idDupChk($event)">중복확인</a><br>
-                              <input type="hidden" name="checked_id" value=""
-                              id="submitIdChk"> <!-- 제대로 중복확인 되면 y가 들어옴 --> <span
-                              id="idvalChk"></span><br> <span id="idDubChk"></span></td>
-                        </tr>
+	<div id="main">
+		<div id="content">
+			<div class="page_aticle">
+				<div class="type_form member_join ">
+					<form id="form" action="/member/joinView" method="post" name="frm"
+						id="form">
+						<div class="field_head">
+							<h3 class="tit">회원가입</h3>
+							<p class="sub1">
+								<span class="ico">*</span>필수입력사항
+							</p>
+						</div>
+						<table class="tbl_comm">
+							<tbody>
+								<tr id="idTr">
+									<th class="fst">아이디 <span class="ico">*</span>
+									</th>
+									<td><input type="text" name="id" maxlength="16"
+										placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합" id="left"
+										v-model="inputIdVal" required> <a href="#"
+										class="btn default" v-on:click="idDupChk($event)">중복확인</a><br>
+										<input type="hidden" name="checked_id" value=""
+										id="submitIdChk"> <!-- 제대로 중복확인 되면 y가 들어옴 --> <span
+										id="idvalChk"></span><br> <span id="idDubChk"></span></td>
+								</tr>
 
-                        <tr>
-                           <th>비밀번호 <span class="ico">*</span>
-                           </th>
-                           <td id="pwChkTd"><input type="password" name="pw"
-                              maxlength="16" placeholder="비밀번호를 입력해주세요" v-model="inputPw"
-                              required> <input type="hidden" name="checked_pw"
-                              value="" id="submitPwChk"><br> <!-- 제대로 비번 입력되면 y가 들어옴 -->
-                              {{ pwLengthChk }}</td>
-                        </tr>
+								<tr>
+									<th>비밀번호 <span class="ico">*</span>
+									</th>
+									<td id="pwChkTd"><input type="password" name="pw"
+										maxlength="16" placeholder="비밀번호를 입력해주세요" v-model="inputPw"
+										required> <input type="hidden" name="checked_pw"
+										value="" id="submitPwChk"><br> <!-- 제대로 비번 입력되면 y가 들어옴 -->
+										{{ pwLengthChk }}</td>
+								</tr>
 
-                        <tr>
-                           <th>비밀번호확인 <span class="ico">*</span>
-                           </th>
-                           <td id="rePwChkTd"><input type="password" name="re_pw"
-                              maxlength="16" placeholder="비밀번호를 한번 더 입력해주세요"
-                              v-model="inputRePw" required><br> <input
-                              type="hidden" name="checked_rePw" value="" id="submit4PwChk"><br>
-                              <!-- 제대로 비번 입력되면 y가 들어옴 --> {{ pwEqualChk }}</td>
-                        </tr>
+								<tr>
+									<th>비밀번호확인 <span class="ico">*</span>
+									</th>
+									<td id="rePwChkTd"><input type="password" name="re_pw"
+										maxlength="16" placeholder="비밀번호를 한번 더 입력해주세요"
+										v-model="inputRePw" required><br> <input
+										type="hidden" name="checked_rePw" value="" id="submit4PwChk"><br>
+										<!-- 제대로 비번 입력되면 y가 들어옴 --> {{ pwEqualChk }}</td>
+								</tr>
 
-                        <tr>
-                           <th>이름 <span class="ico">*</span>
-                           </th>
-                           <td><input type="text" name="name" v-model="inputName"
-                              maxlength="16" required placeholder="이름을 입력해주세요"></td>
-                        </tr>
+								<tr>
+									<th>이름 <span class="ico">*</span>
+									</th>
+									<td><input type="text" name="name" v-model="inputName"
+										maxlength="16" required placeholder="이름을 입력해주세요"></td>
+								</tr>
 
-                        <tr>
-                           <th>이메일 <span class="ico">*</span>
-                           </th>
-                           <td>
-                              <div id="emailBtn">
-                                 <input type="text" name="email" maxlength="25"
-                                    v-model="inputEmailVal" required
-                                    placeholder="예: marketkurly@kurly.com"> <a href="#"
-                                    class="btn default" v-on:click="emailChk($event)">중복확인</a>
-                              </div>
-                              <div id="chkRandom">
-                                 <input type="text" v-model="inputRandomNum"
-                                    name="randomInput" maxlength="16" placeholder="인증번호를 입력하세요."
-                                    required> <a href="#" class="btn default"
-                                    v-on:click="randomNumChk($event)">인증번호확인</a>
-                              </div> <span id="randomNumspan">※ 이메일 인증번호를 확인해주세요.</span> <input
-                              type="hidden" name="checked_email" value=""
-                              id="submitEmailChk">
-                           </td>
-                        </tr>
+								<tr>
+									<th>이메일 <span class="ico">*</span>
+									</th>
+									<td>
+										<div id="emailBtn">
+											<input type="text" name="email" maxlength="25"
+												v-model="inputEmailVal" required
+												placeholder="예: marketkurly@kurly.com"> <a href="#"
+												class="btn default" v-on:click="emailChk($event)">중복확인</a>
+										</div>
+										<div id="chkRandom">
+											<input type="text" v-model="inputRandomNum"
+												name="randomInput" maxlength="16" placeholder="인증번호를 입력하세요."
+												required> <a href="#" class="btn default"
+												v-on:click="randomNumChk($event)">인증번호확인</a>
+										</div> <span id="randomNumspan">※ 이메일 인증번호를 확인해주세요.</span> <input
+										type="hidden" name="checked_email" value=""
+										id="submitEmailChk">
+									</td>
+								</tr>
 
-                        <tr>
-                           <th>휴대폰 <span class="ico">*</span>
-                           </th>
-                           <td><input type="text" name="tel" v-model="inputTel"
-                              maxlength="16" required placeholder="숫자만 입력해주세요"></td>
-                        </tr>
+								<tr>
+									<th>휴대폰 <span class="ico">*</span>
+									</th>
+									<td><input type="text" name="tel" v-model="inputTel"
+										maxlength="16" required placeholder="숫자만 입력해주세요"></td>
+								</tr>
 
-                        <tr>
-                           <th>주소 <span class="ico">*</span>
-                           </th>
-                           <td><br>
-                              <div id="addressBtn">
-                                 <a href="#" id="addressSearch" onclick="DaumAddress()"> <span
-                                    id="addressNo">주소 검색</span>
-                                 </a><br>
-                              </div>
-                              <div id="addressInput">
-                                 <input type="text" name="postcode" v-model="inputPostNo"
-                                    id="postcode"> <a href="#" class="btn default"
-                                    onclick="DaumAddress()">재검색</a> <input type="text"
-                                    name="address1" v-model="inputAddress1" id="address1">
-                                 <input type="text" name="address2" v-model="inputAddress2"
-                                    id="address2">
-                              </div> <span id="span_text">배송지에 따라 상품 정보가 달라질 수 있습니다.</span></td>
-                        </tr>
+								<tr>
+									<th>주소 <span class="ico">*</span>
+									</th>
+									<td><br>
+										<div id="addressBtn">
+											<a href="#" id="addressSearch" onclick="DaumAddress()"> <span
+												id="addressNo">주소 검색</span>
+											</a><br>
+										</div>
+										<div id="addressInput">
+											<input type="text" name="postcode"
+												id="postcode"> <a href="#" class="btn default"
+												onclick="DaumAddress()">재검색</a> <input type="text"
+												name="address1" id="address1">
+											<input type="text" name="address2" 
+												id="address2">
+										</div> <span id="span_text">배송지에 따라 상품 정보가 달라질 수 있습니다.</span></td>
+								</tr>
 
-                        <tr class="select_sex">
-                           <th>성별</th>
-                           <td>
-                              <!-- 라디오버튼 값받기 알아본 후 name 붙이기 --> <label class> <input
-                                 type="radio" name="gender" v-model="inputMan" value="남"><span
-                                 class="ico"></span>남자
-                           </label> <label class> <input type="radio" name="gender"
-                                 v-model="inputWoman" value="여"><span class="ico"></span>여자
-                           </label> <label class="checked"> <input type="radio"
-                                 name="gender" v-model="inputNotCheck" value="X"
-                                 checked="checked"><span class="ico"></span>선택안함
-                           </label>
-                           </td>
-                        </tr>
-                        <tr class="birth field_birth">
-                           <th>생년월일</th>
-                           <td>
-                              <div class="birth_day">
-                                 <input type="text" name="birthday" v-model="inputBirthday"
-                                    maxlength="8" placeholder="예) 19920411">
-                              </div>
-                           </td>
-                        </tr>
-                        <tr class="route" id="selectRecommend">
-                           <th>추천인</th>
-                           <td><br>
-                              <div class="input_wrapper" selected>
-                                 <input type="text" name="push" class="inp"
-                                    v-on:keyup="pushIdChk" v-model="inputPushId"
-                                    placeholder=" 추천인 아이디를 입력하세요." id="ex2"> <br> <span
-                                    id="pushIdChk">※ 추천인 아이디 입력하면 적립금 5000원의 혜택!</span> <input
-                                    type="text" name="checked_pushId" id="jmembership"
-                                    v-model="jmembership">
-                                 <!-- v-bind:value="point" -->
-                                 <p class="span_text">
-                                    추천인 아이디와 이벤트명 중 하나만 선택 가능합니다.<br> 가입 이후, 수정이 불가합니다.<br>
-                                    대소문자 및 띄어쓰기에 유의해주세요.
-                                 </p>
-                              </div></td>
-                        </tr>
-                        <tr class="reg_agree">
-                           <th>이용약관동의<span class="ico">*</span></th>
-                           <td>
-                              <div class="check">
-                                 <label class="check_agree label_all_check label_block">
-                                    <input type="checkbox" id="allcheck"> <span
-                                    class="ico"></span> 전체 동의합니다.
-                                 </label>
-                                 <p class="sub1">선택항목에 동의하지 않은 경우도 회원가입 및 일반적인 서비스를 이용할 수
-                                    있습니다.</p>
-                              </div>
-                              <div class="check_view">
-                                 <label class="check_agree label_block"> <input
-                                    type="checkbox" name="chk" id="chk1"> <span
-                                    class="ico"></span> 이용약관 동의 <span class="sub1">(필수)</span>
-                                 </label>
-                              </div>
-                              <div class="check_view">
-                                 <label class="check_agree label_block"> <input
-                                    type="checkbox" name="chk" id="chk2"> <span
-                                    class="ico"></span>개인정보처리방침 동의 <span class="sub1">(필수)</span>
-                                 </label>
+								<tr class="select_sex">
+									<th>성별</th>
+									<td>
+										<!-- 라디오버튼 값받기 알아본 후 name 붙이기 --> <label class> <input
+											type="radio" name="gender" v-model="inputMan" value="남"><span
+											class="ico"></span>남자
+									</label> <label class> <input type="radio" name="gender"
+											v-model="inputWoman" value="여"><span class="ico"></span>여자
+									</label> <label class="checked"> <input type="radio"
+											name="gender" v-model="inputNotCheck" value="X"
+											checked="checked"><span class="ico"></span>선택안함
+									</label>
+									</td>
+								</tr>
+								<tr class="birth field_birth">
+									<th>생년월일</th>
+									<td>
+										<div class="birth_day">
+											<input type="text" name="birthday" v-model="inputBirthday"
+												maxlength="8" placeholder="예) 19920411">
+										</div>
+									</td>
+								</tr>
+								<tr class="route" id="selectRecommend">
+									<th>추천인</th>
+									<td><br>
+										<div class="input_wrapper" selected>
+											<input type="text" name="push" class="inp"
+												v-on:keyup="pushIdChk" v-model="inputPushId"
+												placeholder=" 추천인 아이디를 입력하세요." id="ex2"> <br> <span
+												id="pushIdChk">※ 추천인 아이디 입력하면 적립금 5000원의 혜택!</span> <input
+												type="hidden" name="checked_pushId" id="jmembership">
+											<!-- v-bind:value="point" -->
+											<p class="span_text">
+												추천인 아이디와 이벤트명 중 하나만 선택 가능합니다.<br> 가입 이후, 수정이 불가합니다.<br>
+												대소문자 및 띄어쓰기에 유의해주세요.
+											</p>
+										</div></td>
+								</tr>
+								<tr class="reg_agree">
+									<th>이용약관동의<span class="ico">*</span></th>
+									<td>
+										<div class="check">
+											<label class="check_agree label_all_check label_block">
+												<input type="checkbox" id="allcheck"> <span
+												class="ico"></span> 전체 동의합니다.
+											</label>
+											<p class="sub1">선택항목에 동의하지 않은 경우도 회원가입 및 일반적인 서비스를 이용할 수
+												있습니다.</p>
+										</div>
+										<div class="check_view">
+											<label class="check_agree label_block"> <input
+												type="checkbox" name="chk" id="chk1"> <span
+												class="ico"></span> 이용약관 동의 <span class="sub1">(필수)</span>
+											</label>
+										</div>
+										<div class="check_view">
+											<label class="check_agree label_block"> <input
+												type="checkbox" name="chk" id="chk2"> <span
+												class="ico"></span>개인정보처리방침 동의 <span class="sub1">(필수)</span>
+											</label>
 
-                              </div>
-                              <div class="check_view">
-                                 <input type="hidden" id="consentHidden" name="consent[1]"
-                                    value="n"> <label class="check_agree label_block">
-                                    <input type="checkbox" name="chk"> <span class="ico"></span>개인정보처리방침
-                                    동의 <span class="sub1">(선택)</span>
-                                 </label>
+										</div>
+										<div class="check_view">
+											<input type="hidden" id="consentHidden" name="consent[1]"
+												value="n"> <label class="check_agree label_block">
+												<input type="checkbox" name="chk"> <span class="ico"></span>개인정보처리방침
+												동의 <span class="sub1">(선택)</span>
+											</label>
 
-                              </div>
-                              <div class="check_view">
-                                 <label class="label_block check_agree "> <input
-                                    type="checkbox" name="chk"> <span class="ico"></span>무료배송,
-                                    할인쿠폰 등 혜택/정보 수신 동의 <span class="sub1">(선택)</span>
-                                 </label>
-                                 <div class="check_event email_sms">
-                                    <label class="label_block check_agree "> <input
-                                       type="checkbox" name="chk"> <span class="ico"></span>SMS
-                                    </label> <label class="label_block check_agree "> <input
-                                       type="checkbox" name="chk"> <span class="ico"></span>이메일
-                                    </label>
-                                 </div>
-                                 <p class="sms_info">
-                                    동의 시 한 달간 [5% 적립] + [무제한 무료배송] <span class="sub1">(첫
-                                       주문 후 적용)</span>
-                                 </p>
-                              </div>
-                              <div class="check_view">
-                                 <label class=" check_agree label_block"> <input
-                                    type="checkbox" name="chk" id="chk3" id="chk3"> <span
-                                    class="ico"></span>본인은 만 14세 이상입니다. <span class="sub1">(필수)</span>
-                                 </label>
-                              </div>
-                           </td>
-                        </tr>
-                     </tbody>
-                  </table>
-                  <div id="formsubmit" class="form_footer">
-                     <input type="button" class="btn active btn_join"
-                        style='cursor: pointer;' v-on:click="btnSubmit($event)"
-                        id="btnSubmit" value="가입하기" />
+										</div>
+										<div class="check_view">
+											<label class="label_block check_agree "> <input
+												type="checkbox" name="chk"> <span class="ico"></span>무료배송,
+												할인쿠폰 등 혜택/정보 수신 동의 <span class="sub1">(선택)</span>
+											</label>
+											<div class="check_event email_sms">
+												<label class="label_block check_agree "> <input
+													type="checkbox" name="chk"> <span class="ico"></span>SMS
+												</label> <label class="label_block check_agree "> <input
+													type="checkbox" name="chk"> <span class="ico"></span>이메일
+												</label>
+											</div>
+											<p class="sms_info">
+												동의 시 한 달간 [5% 적립] + [무제한 무료배송] <span class="sub1">(첫
+													주문 후 적용)</span>
+											</p>
+										</div>
+										<div class="check_view">
+											<label class=" check_agree label_block"> <input
+												type="checkbox" name="chk" id="chk3" id="chk3"> <span
+												class="ico"></span>본인은 만 14세 이상입니다. <span class="sub1">(필수)</span>
+											</label>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div id="formsubmit" class="form_footer">
+							<input type="button" class="btn active btn_join"
+								style='cursor: pointer;' v-on:click="btnSubmit($event)"
+								id="btnSubmit" value="가입하기" />
 
-                  </div>
-               </form>
-            </div>
-         </div>
-      </div>
-   </div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-   <script
-      src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
-   <script src="../js/jquery-3.5.1.js"></script>
-   <script
-      src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+	<script src="../js/jquery-3.5.1.js"></script>
+	<script
+		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
-   <script>
+	<script>
     
     var app = new Vue({
        el:'#main',
@@ -248,8 +247,8 @@
               inputName: '',
               inputTel: '',
               inputPostNo: '',
-              inputAddress1: '',
-              inputAddress2: '',
+//               inputAddress1: '',
+//               inputAddress2: '',
               inputAddress: '',
               inputMan: '',
               inputWoman: '',
@@ -505,7 +504,7 @@
                    gender: gender,
                    birthday: this.inputBirthday,
                    push: this.inputPushId,
-                   jmembership: jmembership
+//                    jmembership: jmembership
              };
              
              
@@ -623,7 +622,7 @@
     
     </script>
 
-   <script>
+	<script>
 
     // 인풋창 숨기기
     document.getElementById("addressInput").style.display="none";

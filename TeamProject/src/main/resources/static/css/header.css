@@ -271,7 +271,7 @@ img {
 
 .gnb_main .gnb a:hover, #gnb .gnb_main .gnb a.on {
 	font-weight: 700;
-	color: #5f0080;
+	color: #ea97ad;
 }
 
 #gnb .gnb_main .menu1 .ico {
@@ -467,7 +467,7 @@ button {
 	padding: 0 5px;
 	border: 2px solid #fff;
 	border-radius: 10px;
-	background-color: #5f0080;
+	background-color: #ea97ad;
 	font-size: 9px;
 	color: #fff;
 	line-height: 15px;
@@ -608,7 +608,7 @@ p {
 }
 
 #gnb .layer_location .emph {
-	color: #5f0080;
+	color: #ea97ad;
 }
 
 #gnb .layer_location .group_button {
@@ -622,9 +622,9 @@ p {
 }
 
 #gnb .layer_location .btn.default {
-	border: 1px solid #5f0080;
+	border: 1px solid #ea97ad;
 	background-color: #fff;
-	color: #5f0080;
+	color: #ea97ad;
 }
 
 #gnb .layer_location .btn {
@@ -651,8 +651,8 @@ p {
 }
 
 #gnb .layer_location .btn.active {
-	border: 1px solid #5f0081;
-	background-color: #5f0080;
+	border: 1px solid #ea97ad;
+	background-color: #ea97ad;
 	color: #fff;
 }
 

@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,10 +18,12 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.platform.commons.util.StringUtils;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +35,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.example.domain.AttachVo;
 import com.example.domain.GoodsVo;
+import com.example.service.AttachService;
 import com.example.service.GoodsService;
 import com.google.gson.JsonObject;
 
@@ -44,29 +49,38 @@ public class GoodsController {
 
 	@Autowired
 	private GoodsService goodsService;
+	
+	@Autowired
+	private AttachService attachService;
 
 	@GetMapping("/allGoods")
 	public String allGoods(Model model) {
 
-		List<GoodsVo> goodsVos = goodsService.getAllGoods();
+		List<AttachVo> attachVos = goodsService.getAllGoods();
 
-		model.addAttribute("goodsVos", goodsVos);
+		model.addAttribute("attachVos", attachVos);
 
 		return "goods/best/product";
 	}
 
+
+	
 	@GetMapping("/productDetail")
-	public String productDetail(String goodsName, Model model) {
-
-		System.out.println("public String productDetail(String productName, Model model) 실행");
-		System.out.println(goodsName);
-
-		GoodsVo goodsVo = goodsService.getProductDetail(goodsName);
-
+	public String productDetail (String goodsName, Model model) {
+		
+		GoodsVo goodsVo = goodsService.getJollygoodsAndAttaches(goodsName);
+		
+		log.info("attachList : " + goodsVo.getAttachList().toString());
+		
+		
 		model.addAttribute("goodsVo", goodsVo);
-
+		model.addAttribute("attachList", goodsVo.getAttachList());
+		
 		return "goods/productDetail";
 	}
+	
+	
+	
 
 	@GetMapping("/writer")
 	public void goodsWriter() {
@@ -96,9 +110,11 @@ public class GoodsController {
 
 	// 주글쓰기
 	@PostMapping("/writer")
-	public String productWrite(HttpServletRequest request,
+	public String productWrite(HttpServletResponse response,HttpServletRequest request,
 			@RequestParam(name = "filename1", required = false) List<MultipartFile> multipartFiles, GoodsVo goodsVo)
 			throws IOException {
+		
+//		response.setCharacterEncoding("UTF-8");
 
 		goodsVo.setUpload(new Timestamp(System.currentTimeMillis()));
 
@@ -139,20 +155,17 @@ public class GoodsController {
 
 				AttachVo attachVo = new AttachVo();
 
-				attachVo.setNoNum(1);
+
 
 				attachVo.setUuid(strUuid);
 				attachVo.setFilename1(filename);
 				attachVo.setUploadpath(strDate);
+				attachVo.setAttachName(goodsVo.getGoodsName());
+				attachVo.setMain("O");
 
 				if (isImage(filename)) {
 					attachVo.setImage("I");
-
-					File thumbnailFile = new File(dir, "s_" + uploadFilename);
-
-					try (FileOutputStream fos = new FileOutputStream(thumbnailFile)) {
-						Thumbnailator.createThumbnail(multipartFile.getInputStream(), fos, 100, 100);
-					}
+					
 				} else {
 					attachVo.setImage("O");
 				}
@@ -164,15 +177,19 @@ public class GoodsController {
 //	      log.info("productVo.getGoods_name() = " + productVo.getGoods_name());
 
 		goodsService.addGoodsAndAttaches(goodsVo, attachList);
+		
+		// url 한글처리
+		String goodsNameKor = URLEncoder.encode(goodsVo.getGoodsName(), "UTF-8");
 
-		return "redirect:/goods/productDetail";
+		return "redirect:/goods/productDetail?goodsName=" + goodsNameKor;
 
 	}
 
 	@RequestMapping(value = "/ckUpload", method = RequestMethod.POST)
 	@ResponseBody
 	public String fileUpload(HttpServletRequest request, HttpServletResponse response,
-			MultipartHttpServletRequest multiFile, AttachVo attachVo) throws Exception {
+			MultipartHttpServletRequest multiFile, AttachVo attachVo, String goodsName)  throws Exception {
+		
 		JsonObject json = new JsonObject();
 		PrintWriter printWriter = null;
 		OutputStream out = null;
@@ -180,7 +197,8 @@ public class GoodsController {
 		ServletContext application = request.getServletContext();
 		String realPath = application.getRealPath("/"); // webapp 폴더의 실제경로
 		log.info("realPath : " + realPath);
-
+		log.info("goodsName: " + goodsName);
+		
 		String strDate = this.getFolder();
 
 		File dir = new File(realPath + "/upload", strDate);
@@ -209,34 +227,49 @@ public class GoodsController {
 						String uploadFilename = strUuid + "_" + realName;
 
 						String realSaveFile = dir + "\\" + uploadFilename;
+						
+						String fileUrl = "/upload/" + strDate + "\\" + uploadFilename;
+						log.info("fileUrl " + fileUrl);
 
 						File saveFile = new File(realSaveFile);
+						
+						
 
 						byte[] bytes = file.getBytes();
-						String uploadPath = request.getServletContext().getRealPath("/img");
 
-						uploadPath = uploadPath + "/" + fileName;
-						log.info("uploadPath = " + uploadPath);
 						out = new FileOutputStream(saveFile);
 						out.write(bytes);
 
 						printWriter = response.getWriter();
 						response.setContentType("text/html");
 						log.info("request.getContextPath() = " + request.getContextPath());
+						
+						
+						// 한글파일명이 들어오면 DB 업로드 하지 않음
+						if(fileUrl.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")) {
+							
+							log.info("디비 insert 안됨 XXX");
 
-						String fileUrl = "/upload/" + strDate + "\\" + uploadFilename;
-						log.info("fileUrl " + fileUrl);
+							
+							} else {
+//								log.info("goodsVo.getGoodsName() == " + goodsVo.getGoodsName());
+								attachVo.setUuid(strUuid);
+								attachVo.setFilename1(realName);
+								attachVo.setUploadpath(strDate);
+								attachVo.setAttachName(goodsName);
+								attachVo.setMain("X");
+								if (isImage(realName)) {
+									attachVo.setImage("I");
 
-						attachVo.setUuid(strUuid);
-						attachVo.setFilename1(realName);
-						attachVo.setUploadpath(strDate);
+								} else {
+									attachVo.setImage("O");
+								}
+							
+								goodsService.ckUpload(attachVo);
+								log.info("디비 insert 됨 OOO");
+							}
 
-						if (isImage(realName)) {
-							attachVo.setImage("I");
-
-						} else {
-							attachVo.setImage("O");
-						}
+						
 
 						// json 데이터로 등록
 						// {"uploaded" : 1, "fileName" : "test.jpg", "url" : "/img/test.jpg"}
@@ -260,9 +293,39 @@ public class GoodsController {
 				}
 			}
 		}
-		goodsService.ckUpload(attachVo);
+		
 
 		return null;
 	}
-
+	// 상품 삭제하기
+	@GetMapping("/goodsDelete")
+	public String delete(String goodsName, String attachName, HttpServletRequest request) {
+		// 게시글번호에 첨부된 첨부파일 리스트 가져오기
+		List<AttachVo> attachList = attachService.getAttachesByName(goodsName);
+		log.info("attachName  == " + goodsName);
+		log.info("attachList  == " + attachList);
+		
+//		// application 객체 참조 가져오기
+		ServletContext application = request.getServletContext();
+//		// 업로드 기준경로
+		String realPath = application.getRealPath("/"); // webapp
+		log.info("realPath  == " + realPath);
+//		// 첨부파일 삭제하기
+		for (AttachVo attachVo : attachList) {
+			String dir = realPath + "/upload/" + attachVo.getUploadpath();
+			String filename = attachVo.getUuid() + "_" + attachVo.getFilename1();
+			
+			File file = new File(dir, filename);
+			
+			if(file.exists()) {
+				file.delete();
+			}
+		}
+	
+//		// notice 게시글 한개와 attach 첨부파일 여러개를 트랜잭션으로 삭제하기
+		goodsService.deleteGoodsAndAttaches(goodsName);
+		
+		// 글목록으로 리다이렉트 이동
+		return "redirect:/goods/allGoods";
+	} // delete
 }

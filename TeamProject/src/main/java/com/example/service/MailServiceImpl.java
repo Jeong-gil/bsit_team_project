@@ -1,8 +1,12 @@
 package com.example.service;
 
+
+import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.groovy.util.Maps;
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -32,10 +36,13 @@ public class MailServiceImpl implements MailService {
 		String msg = "메일이 발송되었습니다.<br>" + "<script language='javascript'>" + "alert('인증메일이 발송 되었습니다.');"
 //            + "window.opener.document.getElementById('Checked_mail').value = 'y';"
 				+ "self.close();" + "</script>";
+		
 		// 맵을 여러개 발송 아래의 코드와 같음(36행과 , 40행(그루비 Maps))
-//      Map<Spring, Object> rs = new HashMap<>();
-//      rs.put("resultCode", resultCode);
-//      rs.put("msg", msg);
-		return Maps.of("resultCode", resultCode, "msg", msg);
+      Map<String, Object> rs = new HashMap<>();
+      rs.put("resultCode", resultCode);
+      rs.put("msg", msg);
+      
+      return rs;
+//		return Maps.of("resultCode", resultCode, "msg", msg);
 	}
 }

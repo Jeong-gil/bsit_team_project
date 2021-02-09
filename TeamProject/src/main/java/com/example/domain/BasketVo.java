@@ -15,6 +15,6 @@ public class BasketVo {
 	private String consumerID;
 	private String goodsName;
 	private int amount;
-	private int totalPrice;
+	private int salePrice;
 	
 }

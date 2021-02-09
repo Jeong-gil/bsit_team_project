@@ -10,5 +10,11 @@ public class AttachVo {
 	private String filename1;
 	private String uploadpath;
 	private String image;
-	private int noNum;
+	private String attachName;
+	private String main;
+	
+	// 상품 뿌려주기
+	private String goodsName;
+	private String subGoods;
+	private int salePrice;
 }

@@ -146,7 +146,7 @@ body, input, select, textarea, button {
 							name="pw" size="20" tabindex="2" placeholder="비밀번호를입력해주세요"
 							required>
 						<div class="checkbox_save">
-							<label class="label_checkbox checked"> <input
+							<label class="label_checkbox"> <input
 								type="checkbox" id="chk_security" name="chk_security"
 								value="true"> 로그인유지
 							</label>

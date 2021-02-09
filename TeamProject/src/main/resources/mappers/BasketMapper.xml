@@ -13,14 +13,25 @@
 	<!-- 장바구니 추가하기 -->
 	<insert id="addBasket">
 		INSERT INTO jolly_cart (`consumer_id`, `goods_name`,
-		`amount`, `total_price`) VALUES (#{consumerID}, #{goodsName},
-		#{amount}, #{totalPrice});
+		`amount`) VALUES (#{consumerID}, #{goodsName}, #{amount});
 	</insert>
 
 	<!-- 회원 장바구니 정보 불러오기 -->
 	<select id="getMemberBasket" resultType="basketVo">
-		SELECT * FROM jolly_cart
-		where consumer_id = #{consumerID};
+		SELECT
+			jc.cart_id
+		    , jc.consumer_id
+			, jg.goods_name
+		    , jc.amount
+		    , jg.sale_price
+		FROM
+			jollygoods AS jg
+		LEFT JOIN
+			jolly_cart AS jc
+		ON
+			jg.goods_name = jc.goods_name
+		WHERE
+			jc.consumer_id = #{consumerID};
 	</select>
 
 </mapper>

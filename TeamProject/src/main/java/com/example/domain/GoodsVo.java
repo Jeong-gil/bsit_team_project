@@ -1,6 +1,7 @@
 package com.example.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,5 +26,7 @@ public class GoodsVo {
 	private String contents1;
 	private String contents2;
 	private Timestamp upload;
+	
+	private List<AttachVo> attachList;  // JOIN 쿼리 1:N 관계
 
 }

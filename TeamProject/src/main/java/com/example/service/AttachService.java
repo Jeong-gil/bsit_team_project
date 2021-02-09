@@ -25,5 +25,14 @@ public class AttachService {
 			attachMapper.insertAttach(attachVo);
 		}
 	}
+	
+	public List<AttachVo> getAttachesByName(String attachName) {
+		List<AttachVo> attachList = attachMapper.getAttachesByName(attachName);
+		return attachList;
+	}
+	
+
+	
+	
 
 }

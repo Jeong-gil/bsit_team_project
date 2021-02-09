@@ -5,21 +5,62 @@
 <mapper namespace="com.example.mapper.GoodsMapper">
 
 	<!-- 전체 상품 불러오기 -->
-	<select id="getAllGoods" resultType="goodsVo">
-		SELECT * FROM jollygoods
-		ORDER BY upload DESC
+<!-- 	<select id="getAllGoods" resultType="goodsVo"> -->
+<!-- 		SELECT * FROM jollygoods -->
+<!-- 		ORDER BY upload DESC -->
+<!-- 	</select> -->
+
+	<select id="getAllGoods" resultType="attachVo">
+		SELECT n.goods_name, n.sub_goods, n.sale_price, 
+		a.uuid, a.filename1, a.uploadpath, a.image, a.attach_name
+		FROM jollygoods n JOIN attach a
+		ON n.goods_name = a.attach_name
 	</select>
 
-	<!-- 선택한 상품 상세정보 불러오기 -->
-	<select id="getProductDetail" resultType="goodsVo">
-		SELECT * FROM
-		jollygoods WHERE goods_name = #{goodsName}
+	<select id="getJollygoodsAndAttaches" resultMap="jollygoodsAndAttaches">
+	SELECT n.goods_name, n.sub_goods, n.main_category, n.sub_category, n.sale_price, n.sales_unit,
+		       n.volume, n.del_classification, n.packing_type, n.allergy, n.shelf_life, n.fileuploadpath, n.contents1, n.contents2, n.upload, 
+		       a.num, a.uuid, a.filename1, a.uploadpath, a.image, a.main, a.attach_name
+		FROM jollygoods n LEFT OUTER JOIN attach a
+		ON n.goods_name = a.attach_name
+		where n.goods_name = #{attachName} 
 	</select>
-	
+	<resultMap id="jollygoodsAndAttaches" type="goodsVo">
+		<!-- property 속성은 setter 메소드 이름을 의미함! -->
+		<id column="goods_name" property="goodsName"/>
+		<result column="sub_goods" property="subGoods"/>
+		<result column="main_category" property="mainCategory"/>
+		<result column="sub_category" property="subCategory"/>
+		<result column="sale_price" property="salePrice"/>
+		<result column="sales_unit" property="salesUnit"/>
+		<result column="volume" property="volume"/>
+		<result column="del_classification" property="delClassification"/>
+		<result column="packing_type" property="packingType"/>
+		<result column="allergy" property="allergy"/>
+		<result column="shelf_life" property="shelfLife"/>
+		<result column="fileuploadpath" property="fileuploadpath"/>
+		<result column="contents1" property="contents1"/>
+		<result column="contents2" property="contents2"/>
+		<result column="upload" property="upload"/>
+		<collection property="attachList" ofType="attachVo" javaType="arraylist">
+			<id column="num" property="num"/>
+			<result column="uuid" property="uuid"/>
+			<result column="filename1" property="filename1"/>
+			<result column="uploadpath" property="uploadpath"/>
+			<result column="image" property="image"/>
+			<result column="main" property="main"/>
+			<result column="attach_name" property="attachName"/>
+		</collection>
+	</resultMap>
+
 	<insert id="goodsWrite">
       INSERT INTO jolly.jollygoods (goods_name, sub_goods, main_category, sub_category, sale_price, sales_unit, volume, del_classification, packing_type, allergy, shelf_life, contents1, contents2, upload) 
       VALUES (#{goodsName}, #{subGoods}, #{mainCategory}, #{subCategory}, #{salePrice}, #{salesUnit}, #{volume}, #{delClassification}, #{packingType}, #{allergy}, #{shelfLife}, #{contents1}, #{contents2}, #{upload})
    </insert>
+   
+   <delete id="deleteGoodsByName">
+   		DELETE FROM jolly.jollygoods WHERE goods_name = #{goodsName}
+   </delete>
 	
 
 </mapper>

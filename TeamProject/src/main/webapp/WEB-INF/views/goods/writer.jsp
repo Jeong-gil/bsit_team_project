@@ -95,7 +95,6 @@
 		<div style="width: 300px; margin: auto;">
 			<h2>상품 등록 페이지</h2>
 		</div>
-
 		<div class="container-fluid">
 			<!-- 그룹 태그로 role과 aria-multiselectable를 설정한다. -->
 			<div class="panel-group" id="accordion" role="tablist"
@@ -137,7 +136,7 @@
 				<table class="table">
 					<tr>
 						<th scope="col" colspan="2"><input type="text"
-							style="font-size: 32px;" name="goodsName"
+							style="font-size: 32px;" name="goodsName" id="goodsNameId"
 							placeholder="ex) 말린 감귤 / goods_name"><br> <input
 							type="text" style="font-size: 16px;" name="subGoods"
 							placeholder="ex) 말린 감귤 / sub_goods"><br> <input
@@ -206,13 +205,12 @@
 			<br> <br> <br> <br> <br> <br> <br>
 			<br>
 			<ul class="nav nav-tabs nav-justified" id="t1">
-				<li class="active" onclick="fnMove('1')"><a href="#"
-					onclick="return false;">메뉴1</a></li>
+				<li class="active" onclick="fnMove('1')"><a href="#"onclick="return false;">메뉴1</a></li>
 				<li onclick="fnMove('2')"><a href="#" onclick="return false;">메뉴2</a></li>
 				<li onclick="fnMove('3')"><a href="#" onclick="return false;">메뉴3</a></li>
 				<li onclick="fnMove('4')"><a href="#" onclick="return false;">메뉴4</a></li>
 			</ul>
-			<div style="background: aqua;">
+			<div>
 				<!--            <textarea id="editor-body1" name="contents1" placeholder="내용" -->
 				<!-- 				required="required"></textarea> -->
 				<textarea name="contents1" id="editor1" rows="10" cols="80"> </textarea>
@@ -224,12 +222,11 @@
 			<br>
 			<ul class="nav nav-tabs nav-justified" id="t2">
 				<li onclick="fnMove('1')"><a href="#" onclick="return false;">메뉴1</a></li>
-				<li class="active" onclick="fnMove('2')"><a href="#"
-					onclick="return false;">메뉴2</a></li>
+				<li class="active" onclick="fnMove('2')"><a href="#"onclick="return false;">메뉴2</a></li>
 				<li onclick="fnMove('3')"><a href="#" onclick="return false;">메뉴3</a></li>
 				<li onclick="fnMove('4')"><a href="#" onclick="return false;">메뉴4</a></li>
 			</ul>
-			<div style="background: black;">
+			<div>
 				<!--             <textarea id="editor-body2" name="contents2" placeholder="내용" -->
 				<!-- 				required="required"></textarea> -->
 				<textarea name="contents2" id="editor2" rows="10" cols="80"> </textarea>
@@ -247,7 +244,7 @@
 	<jsp:include page="/WEB-INF/views/include/footer_.jsp" />
 	<!-- 	<script src="https://cdn.ckeditor.com/4.8.0/full-all/ckeditor.js"></script> -->
 	<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
-
+<!-- 	<script src="../js/jquery-3.5.1.js"></script> -->
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 
 	<script>
@@ -310,18 +307,49 @@
     
 //     CKEDITOR.replace( 'editor1', {height: 500}, {filebrowserUploadUrl:'/mine/imageUpload.do'});
 //     CKEDITOR.replace( 'editor2', {height: 500});
+// 작업중@@@@@@@@@@@@@@@
+// let goodsName = 'ffff';
 
-	$(function(){
-		CKEDITOR.replace('editor1',{
-			filebrowserUploadUrl: '/goods/ckUpload'
-		});
-	});
+
+
+// function editor1(goodsName){
+// 	let str = encodeURIComponent(goodsName);
+// 	alert('str = ' + str);
 	
-	$(function(){
+// 	CKEDITOR.replace('editor1',{
+// 		filebrowserUploadUrl: '/goods/ckUpload?goodsName=' + encodeURIComponent(goodsName)
+// 	});
+	
+// 	CKEDITOR.replace('editor2',{
+// 		filebrowserUploadUrl: '/goods/ckUpload?goodsName=' + encodeURIComponent(goodsName)
+// 	});
+// }
+
+
+
+$(function() {
+	$("#editor1").css('opacity', '0');
+	$("#editor2").css('opacity', '0');
+});
+
+$("#goodsNameId").on("propertychange chang keyup paste",function() {
+	let goodsName = $("#goodsNameId").val();
+	
+
+	CKEDITOR.replace('editor1',{
+		filebrowserUploadUrl: '/goods/ckUpload?goodsName=' + encodeURIComponent(goodsName)
+				});
+	
 		CKEDITOR.replace('editor2',{
-			filebrowserUploadUrl: '/goods/ckUpload'
-		});
+		filebrowserUploadUrl: '/goods/ckUpload?goodsName=' + encodeURIComponent(goodsName)
 	});
+		
+		$("#editor1").css('opacity', '1');
+		$("#editor2").css('opacity', '1');
+	
+});
+	
+
   
     </script>
 

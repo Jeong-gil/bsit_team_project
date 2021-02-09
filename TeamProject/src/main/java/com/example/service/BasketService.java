@@ -19,10 +19,10 @@ public class BasketService {
 	@Autowired
 	private BasketMapper basketMapper;
 
-	public void addBasket(String consumerID, String goodsName, int amount, int totalPrice) {
+	public void addBasket(String consumerID, String goodsName, int amount) {
 
 		basketMapper.deleteOne(consumerID, goodsName);
-		basketMapper.addBasket(consumerID, goodsName, amount, totalPrice);
+		basketMapper.addBasket(consumerID, goodsName, amount);
 
 	}
 

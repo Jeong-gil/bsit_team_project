@@ -35,13 +35,17 @@
 			<version>1.6.2</version>
 		</dependency>
 
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.codehaus.groovy</groupId> -->
+<!-- 			<artifactId>groovy-all</artifactId> -->
+<!-- 			<version>2.5.7</version> -->
+<!-- 			<type>pom</type> -->
+<!-- 		</dependency> -->
+		
 		<dependency>
-			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy-all</artifactId>
-			<version>2.5.7</version>
-			<type>pom</type>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
 		</dependency>
-
 
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>
@@ -56,6 +60,8 @@
 			<version>0.4.13</version>
 		</dependency>
 
+
+		
 
 		<!-- 메일 -->
 		<dependency>
@@ -153,6 +159,17 @@
 		</dependency>
 
 
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter-security</artifactId> -->
+<!-- 		</dependency> -->
+		
+		
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.security</groupId> -->
+<!-- 			<artifactId>spring-security-test</artifactId> -->
+<!-- 			<scope>test</scope> -->
+<!-- 		</dependency> -->
 	</dependencies>
 
 

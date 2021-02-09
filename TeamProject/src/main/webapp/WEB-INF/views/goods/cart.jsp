@@ -596,6 +596,7 @@ input[type=checkbox] {
 <body>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -605,71 +606,37 @@ input[type=checkbox] {
 			<div id="content">
 				<div id="cartItemList" class="only_pc" style="min-height: 563px;">
 					<div class="empty">
-						<div class="row" style="min-width: 1400px;">
+						<div id="y_contained_goods" class="row" style="min-width: 1400px;">
 							<div class="col-lg-9">
 								<table class="table">
 									<thead>
 										<tr>
-											<th style="width: 20px"><input type="checkbox"></th>
+											<th style="width: 20px"><input id="allcheck" type="checkbox"></th>
 											<th style="font-size: 17px; font-weight: 700;">전체선택
-												(0/0)</th>
+												(0/{{ basketVos.length }})</th>
 											<th style="font-size: 17px; font-weight: 700;" colspan="3">선택삭제</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="basketVo" items="${ basketVos }">
-											<script>
-								console.log('basketVos: ' + basketVos);
-					    	</script>
-											<tr>
-												<th style="vertical-align: middle;"><input
-													type="checkbox"></th>
-												<th><img src="/images/raisins-5822867_1920(건포도).jpg"
-													style="width: 70px; height: 90px; object-fit: cover;"
-													alt=""></th>
-												<th
-													style="vertical-align: middle; font-size: 19px; font-weight: 700;">
-													${ basketVo.goodsName }</th>
-												<th style="padding: 25px 0px;"><input type="number"
-													readonly
-													style="height: 30px; width: 80px; text-align: center; font-size: 15px;"
-													v-model="amount">
-													<div class="btn-group" role="group" aria-label="...">
-														<button type="button" class="btn btn-default"
-															v-on:click="decreaseQuantity">➖</button>
-														<button type="button" class="btn btn-default"
-															v-on:click="increaseQuantity">➕</button>
-													</div></th>
-												<th
-													style="vertical-align: middle; font-weight: 700; font-size: 20px; text-align: right;">
-													${ basketVo.totalPrice }
-													<button type="button" class="btn btn-default">X</button>
-												</th>
-											</tr>
-										</c:forEach>
-
-										<tr>
-											<th style="vertical-align: middle;"><input
-												type="checkbox"></th>
-											<th><img src="/images/raisins-5822867_1920(건포도).jpg"
-												style="width: 70px; height: 90px; object-fit: cover;" alt="">
+										<tr v-for="(basketVo, index) in basketVos" v-bind:key="index">
+											<th style="vertical-align: middle;">
+												<input name="chk" type="checkbox">
 											</th>
-											<th
-												style="vertical-align: middle; font-size: 19px; font-weight: 700;">
-												[타마루제면소] 마제소바 (2인분)</th>
-											<th style="padding: 25px 0px;"><input type="number"
-												readonly
-												style="height: 30px; width: 80px; text-align: center; font-size: 15px;"
-												v-model="amount">
+											<th>
+												<img src="/images/raisins-5822867_1920(건포도).jpg" style="width: 70px; height: 90px; object-fit: cover;" alt="">
+											</th>
+											<th style="vertical-align: middle; font-size: 19px; font-weight: 700;">
+												{{ basketVo.goodsName }}
+											</th>
+											<th style="padding: 25px 0px;">
+												<input type="number" readonly style="height: 30px; width: 80px; text-align: center; font-size: 15px;" v-model="basketVo.amount">
 												<div class="btn-group" role="group" aria-label="...">
-													<button type="button" class="btn btn-default"
-														v-on:click="decreaseQuantity">➖</button>
-													<button type="button" class="btn btn-default"
-														v-on:click="increaseQuantity">➕</button>
-												</div></th>
-											<th
-												style="vertical-align: middle; font-weight: 700; font-size: 20px; text-align: right;">
-												14,700원
+													<button type="button" class="btn btn-default" v-on:click="decreaseQuantity(index)">➖</button>
+													<button type="button" class="btn btn-default" v-on:click="increaseQuantity(index)">➕</button>
+												</div>
+											</th>
+											<th style="vertical-align: middle; font-weight: 700; font-size: 20px; text-align: right;">
+												{{ basketVo.salePrice * basketVo.amount | comma }}원
 												<button type="button" class="btn btn-default">X</button>
 											</th>
 										</tr>
@@ -710,7 +677,7 @@ input[type=checkbox] {
 											<dl class="amount lst">
 												<dt class="tit">결제예정금액</dt>
 												<dd class="price">
-													<span class="num">0</span><span class="won">원</span>
+													<span class="num">{{ getTotalPrice | comma }}</span><span class="won">원</span>
 												</dd>
 											</dl>
 											<div class="reserve"></div>
@@ -738,7 +705,62 @@ input[type=checkbox] {
 	<jsp:include page="/WEB-INF/views/include/footer_.jsp" />
 
 	<script>
+	// 체크박스 전체 채우기
+    
+    $(document).ready(function(){
+		//최상단 체크박스 클릭
+		$("#allcheck").click(function () {
+            //클릭되었으면
+            if ($("#allcheck").prop("checked")) {
+                //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+                $("input[name=chk]").prop("checked", true);
+                //클릭이 안되있으면
+            } else {
+                //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+                $("input[name=chk]").prop("checked", false);
+            }
+        })
+    });
+
+	
 	new Vue({
+		el: '#y_contained_goods',
+
+		data: {
+			basketVos: ${ strbasketVos },
+			testEach: []
+		},
+
+		methods: {
+			increaseQuantity: function (index) {
+				if (this.basketVos[index].amount < 100) {
+					this.basketVos[index].amount++;
+				}
+			},
+
+			decreaseQuantity: function (index) {
+				if (this.basketVos[index].amount > 0) {
+					this.basketVos[index].amount--;
+				}
+			}
+
+		},
+
+		computed: {
+			getTotalPrice: function () {
+				let totalPrice = 0;
+				for (let i=0; i<this.basketVos.length; i++) {
+					totalPrice += this.basketVos[i].salePrice * this.basketVos[i].amount;
+				}
+				return totalPrice;
+			}
+		},
+
+		filters:{
+			comma(val) {
+				return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+		}
 		
 	});
 </script>
