@@ -1,23 +1,8 @@
 package com.example.controller;
 
-import java.sql.Timestamp;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import com.example.domain.JNoticeVo;
-import com.example.domain.PageDto;
-import com.example.service.JNoticeService;
 
 import lombok.extern.java.Log;
 
@@ -29,5 +14,35 @@ public class ConsumerBoardController {
 	@GetMapping("/cboard")
 	public void cboard() {
 		log.info("cobard===================호출됨");
+	}
+	
+	@GetMapping("/shipping")
+	public void shipping() {
+		log.info("shipping=================호출됨");
+	}
+	
+	@GetMapping("/alwaysLiving")
+	public void alwaysLiving() {
+		log.info("alwaysLiving=============호출됨");
+	}
+	
+	@GetMapping("/goodsReview")
+	public void goodsReview() {
+		log.info("goodsReview==============호출됨");
+	}
+	
+	@GetMapping("/savings")
+	public void savings() {
+		log.info("savings==================호출됨");
+	}
+	
+	@GetMapping("/coupon")
+	public void coupon() {
+		log.info("coupon===================호출됨");
+	}
+	
+	@GetMapping("/memberUpdate")
+	public void memberUpdate() {
+		log.info("memberUpdate=============호출됨");
 	}
 }

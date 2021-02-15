@@ -259,11 +259,11 @@ public class MemberController {
 	} // logout
 
 	@GetMapping("/cart")
-	public String cart(@RequestParam(name = "id") String consumerID, Model model) {
+	public String cart(@RequestParam(name = "id") String consumerId, Model model) {
 		
 		Gson gson = new Gson();
 
-		List<BasketVo> basketVoList = basketService.getMemberBasket(consumerID);
+		List<BasketVo> basketVoList = basketService.getMemberBasket(consumerId);
 		
 		String strbasketVos = gson.toJson(basketVoList);
 		

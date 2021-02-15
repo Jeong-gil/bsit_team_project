@@ -613,8 +613,8 @@ input[type=checkbox] {
 										<tr>
 											<th style="width: 20px"><input id="allcheck" type="checkbox"></th>
 											<th style="font-size: 17px; font-weight: 700;">전체선택
-												(0/{{ basketVos.length }})</th>
-											<th style="font-size: 17px; font-weight: 700;" colspan="3">선택삭제</th>
+												({{ SelectedNumber }}/{{ basketVos.length }})</th>
+											<th id="select_del" style="font-size: 17px; font-weight: 700;" colspan="3"><span style="cursor: pointer;">선택삭제</span></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -623,10 +623,14 @@ input[type=checkbox] {
 												<input name="chk" type="checkbox">
 											</th>
 											<th>
-												<img src="/images/raisins-5822867_1920(건포도).jpg" style="width: 70px; height: 90px; object-fit: cover;" alt="">
+												<a v-bind:href="'/goods/productDetail?goodsName=' + basketVo.goodsName">
+													<img v-bind:src="'/upload/' + basketVo.uploadpath + '/' + basketVo.uuid + '_' + basketVo.filename1" style="width: 70px; height: 90px; object-fit: cover;" alt="">
+												</a>
 											</th>
 											<th style="vertical-align: middle; font-size: 19px; font-weight: 700;">
-												{{ basketVo.goodsName }}
+												<a v-bind:href="'/goods/productDetail?goodsName=' + basketVo.goodsName" style="text-decoration: none; color: black;">
+													{{ basketVo.goodsName }}
+												</a>
 											</th>
 											<th style="padding: 25px 0px;">
 												<input type="number" readonly style="height: 30px; width: 80px; text-align: center; font-size: 15px;" v-model="basketVo.amount">
@@ -637,7 +641,7 @@ input[type=checkbox] {
 											</th>
 											<th style="vertical-align: middle; font-weight: 700; font-size: 20px; text-align: right;">
 												{{ basketVo.salePrice * basketVo.amount | comma }}원
-												<button type="button" class="btn btn-default">X</button>
+												<button type="button" class="btn btn-default" v-on:click="delItem(index)">X</button>
 											</th>
 										</tr>
 									</tbody>
@@ -646,15 +650,15 @@ input[type=checkbox] {
 							<div class="col-lg-3">
 								<div class="cart_result">
 									<div class="inner_result" style="top: 60px;">
-										<div class="cart_delivery">
-											<h3 class="tit">배송지</h3>
-											<div class="no_address">
-												<span class="emph">배송지를 입력</span>하고 <br>배송유형을 확인해 보세요!
-												<a href="#" class="btn default"> <span class="ico"></span>주소
-													검색
-												</a>
-											</div>
-										</div>
+<!-- 										<div class="cart_delivery"> -->
+<!-- 											<h3 class="tit">배송지</h3> -->
+<!-- 											<div class="no_address"> -->
+<!-- 												<span class="emph">배송지를 입력</span>하고 <br>배송유형을 확인해 보세요! -->
+<!-- 												<a href="#" class="btn default"> <span class="ico"></span>주소 -->
+<!-- 													검색 -->
+<!-- 												</a> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
 										<div class="amount_view">
 											<dl class="amount">
 												<dt class="tit">상품금액</dt>
@@ -706,29 +710,96 @@ input[type=checkbox] {
 
 	<script>
 	// 체크박스 전체 채우기
-    
-    $(document).ready(function(){
-		//최상단 체크박스 클릭
+    $(document).ready(function () {
 		$("#allcheck").click(function () {
-            //클릭되었으면
             if ($("#allcheck").prop("checked")) {
-                //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
                 $("input[name=chk]").prop("checked", true);
-                //클릭이 안되있으면
             } else {
-                //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
                 $("input[name=chk]").prop("checked", false);
             }
-        })
+        });
     });
 
+    // 선택한 항목 삭제
+    $(document).ready(function () {
+        let delList = [];
+		$('#select_del').click(function () {
+			delList = [];
+			$("input[name=chk]").each(function(index, item) {
+				if ($(item).prop("checked")) {
+					delList.push(app.basketVos[index].goodsName);
+				}
+			});
+			console.log(delList);
+			
+			let id = '';
+			if (${ null ne sessionScope.id }) {
+				id = '${ sessionScope.id }';
+			}
+
+			let obj = {
+					consumerId: id,
+					delGoodsNames: delList
+			};
+			console.log(obj);
+
+			let str = JSON.stringify(obj);
+			console.log(str);
+
+			if (!delList.length == 0) {
+				$.ajax({
+					url: '/basket/delItems',
+					method: 'DELETE',
+					data: str,
+					contentType: 'application/json; charset=UTF-8',
+					success: function (response) {
+						console.log(response);
+						console.log('response.basketVoList: ' + response.basketVoList);
+						app.basketVos = response.basketVoList;
+					},
+					error: function () {
+						alert('장바구니 선택 삭제 오류');
+					}
+				});
+			}
+			
+			
+		});
+    });
+    
+	// 전체선택 체크박스 클릭시, 선택한 항목 갯수 구하기
+    $(document).ready(function () {
+		//최상단 체크박스 클릭
+		$("#allcheck").click(function () {
+            if ($("#allcheck").prop("checked")) {
+            	app.SelectedNumber = app.basketVos.length;
+            } else {
+            	app.SelectedNumber = 0;
+            }
+        });
+    });
+
+    // 각 체크박스 클릭시, 선택한 항목 갯수 구하기
+    $(document).ready(function () {
+		$("input[name=chk]").click(function () {
+			SelectedNumber = [];
+			$("input[name=chk]").each(function(index, item) {
+				if ($(item).prop("checked")) {
+					SelectedNumber.push(0);
+				}
+				app.SelectedNumber = SelectedNumber.length;
+			});
+        });
+    });
+
+// Vue /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	new Vue({
+	let app = new Vue({
 		el: '#y_contained_goods',
 
 		data: {
 			basketVos: ${ strbasketVos },
-			testEach: []
+			SelectedNumber: 0
 		},
 
 		methods: {
@@ -742,6 +813,35 @@ input[type=checkbox] {
 				if (this.basketVos[index].amount > 0) {
 					this.basketVos[index].amount--;
 				}
+			},
+
+			delItem: function (index) {
+				let vm = this;
+
+				let obj = {
+						cartId: this.basketVos[index].cartId,
+						consumerId: this.basketVos[index].consumerId,
+						goodsName: this.basketVos[index].goodsName
+				};
+				console.log(obj);
+
+				let str = JSON.stringify(obj);
+				console.log(str);
+				
+				$.ajax({
+					url: '/basket/delItem',
+					method: 'DELETE',
+					data: str,
+					contentType: 'application/json; charset=UTF-8',
+					success: function (response) {
+						console.log(response);
+						console.log('response.basketVoList: ' + response.basketVoList);
+						vm.basketVos = response.basketVoList;
+					},
+					error: function () {
+						alert('장바구니 단일 삭제 오류');
+					}
+				});
 			}
 
 		},

@@ -177,7 +177,6 @@
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
-
 .Jline {
 	margin-top: 20px;
 }
@@ -185,105 +184,111 @@
 	font-weight: bold;
 	font-size: 25px;
 }
-
-
-.JlineUl {
-	padding-top: 10px;
-	border-top: 2px solid #ea97ad;
-}
-
-.Jdate {
-	padding-top: 20px;
-	font-size: 16px;
-	line-height: 24px;
-	font-weight: 700;
-	color: #666;
-}
-
-.Jgoods {
+.new_address {
 	position: relative;
-	margin-top: 10px;
-	padding: 0 20px;
-	border: 1px solid #dddfe1;
 }
-
-.JgoodsName {
-	padding: 20px 0 13px;
-	border-bottom: 1px solid #dddfe1;
-}
-.Jgoodsname {
-	display: block;
-	overflow: hidden;
-	/* background: url(""); */
-	font-size: 16px;
-	line-height: 24px;
+.Jbtn {
+	position: absolute;
+	right: 3px;
+	bottom: 7px;
+	border: 0 none;
+	background-color: #fff;
 	font-weight: 700;
-	color: #000;
-	cursor: pointer;
+	font-size: 16px;
+	color: #333;
+	line-height: 24px;
+	letter-spacing: -0.5px;
+	text-align: right;
+	outline: none;
 }
-.order_info {
-    overflow: hidden;
-    padding: 14px 0 20px;
+.ico {
+	margin-right: 2px;
+	vertical-align: -2px;
+	width: 15px;
+	height: 15px;
 }
-.goodsImg {
-	float:left;
-	width: 60px;
-	margin-right: 20px;
+.tbl {
+	border-bottom: 1px solid #f4f4f4;
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
 }
-.goodsImg img {
-	width: 60px;
-	height: auto;
+.tblhead {
+	display: table-header-group;
+	vertical-align: middle;
+	border-color: inherit;
 }
-.Jex {
-	overflow: hidden;
-	padding-top: 1px;
-}
-.order_info:first-child {
-	padding-top: 3px;
-}
-.order_info dl {
-	overflow: hidden;
-}
-.order_info dt {
-	float: left;
-	padding-right: 15px;
-	font-size: 12px;
-	color: #000;
-	line-height: 20px;
-}
-.order_info dd {
-	float: left;
+.tblhead th {
+	padding: 17px 0 20px;
+	vertical-align: top;
+	border-top: 2px solid #333;
+	font-weight: 700;
 	font-size: 14px;
 	line-height: 20px;
-	font-weight: 700;
-	color: #000;
+	color: #333;
+	letter-spacing: -.5px;
 }
-.order_info .order_end {
-	color: #ea97ad;
-}
-.order_status {
-	display: table;
-	position: absolute;
-	right: 20px;
-	bottom: 0;
-	height: 114px;
-	vertical-align: middle;
-}
-.inner_status {
+.tit_select {
 	display: table-cell;
-	vertical-align: middle;
+	width: 60px;
 }
-.order_status .link {
-	display: block;
+.tit_address {
+	padding-left: 0;
+	text-indent: -8px;
+	width: auto;
+}
+.tit_receive {
+	width: 120px;
+}
+.tit_phone {
 	width: 100px;
-	height: 34px;
-	border: 1px solid #ea97ad;
-	background-color: #fff;
-	font-size: 12px;
-	color: #ea97ad;
-	line-height: 32px;
+}
+.tit_delivery {
+	width: 100px;
+}
+.tit_modify {
+	width: 60px;
+}
+.tbl td {
+	height: 90px;
+	font-size: 14px;
+	color: #333;
+	line-height: 22px;
+	letter-spacing: -0.4px;
+	vertical-align: middle;
 	text-align: center;
-	cursor: pointer;
+	padding: 0;
+}
+.tbl tr:first-child td {
+	border-top: 1px solid #333;
+}
+.select {
+	display: table-cell;
+}
+.type_radio {
+	font-size: 14px;
+	line-height: 22px;
+}
+.type_radio input[type="radio"] {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	font-weight: 400;
+	letter-spacing: 0;
+	box-sizing: border-box;
+	padding: 0;
+	color: #4c4c4c;
+	font-size: 12px;
+	max-width: 100%;
+	margin: 0;
+}
+.tbl .type_radio input[type="radio"] + .C_ico {
+	margialign: middle;
+}
+.type_radio input[type="radio"]:checked + .C_ico {
+	background : url(/images/plus.jpg);
+	background-size: 24px 24px;
+	background-repeat: no-repeat;
 }
 </style>
 </head>
@@ -354,8 +359,8 @@
 					<h2 class="tit_snb">마이컬리</h2>
 					<div class="inner_snb">
 						<ul class="list_menu">
-							<li class="on"><a href="/consumerBoard/cboard">주문내역</a></li>
-							<li><a href="/consumerBoard/shipping">배송지 관리</a></li>
+							<li><a href="/consumerBoard/cboard">주문내역</a></li>
+							<li class="on"><a href="/consumerBoard/shipping">배송지 관리</a></li>
 							<li><a href="/consumerBoard/alwaysLiving">늘 사는 것</a></li>
 							<li><a href="/consumerBoard/goodsReview">상품 후기</a></li>
 							<li><a href="/consumerBoard/savings">적립금</a></li>
@@ -367,44 +372,37 @@
 				<div class="page_section">
 					<div class="head_aticle Jline">
 						<h2 class="tit Jlineheader">
-							주문내역 <span class="tit_sub">지난 3년간의 주문 내역 조희가 가능합니다</span>
+							배송지 관리 <span class="tit_sub">배송지에 따라 상품정보가 달라질 수 있습니다.</span>
 						</h2>
+						<div class="new_address">
+							<button type="button" class="Jbtn" id="newAddressAdd">
+								<img alt="배송지추가버튼" src="/images/plus.jpg" class="ico">새 배송지 추가
+							</button>
+						</div>
 					</div>
-					<div>
-						<ul class="JlineUl">
-							<li>
-								<div class="Jdate">ex)2021.02.05 (10시 45분)</div>
-								<div class="Jgoods">
-									<div class="JgoodsName">
-										<a class="Jgoodsname">ex)[택배배송] 제주 삼다수 2종 외4건</a>
-									</div>
-									<div class="order_info">
-										<div class="goodsImg">
-											<img alt="상품이미지" src="">
-										</div>
-										<div class="Jex">
-											<dl>
-												<dt>주문번호</dt>
-												<dd>ex)1561651651</dd>
-											</dl>
-											<dl>
-												<dt>결제금액</dt>
-												<dd>ex)10,999</dd>
-											</dl>
-											<dl>
-												<dt>주문상태</dt>
-												<dd class="order_end">배송완료</dd>
-											</dl>
-										</div>
-									</div>
-									<div class="order_status">
-										<span class="inner_status">
-											<a class="link">1:1문의</a>
-										</span>
-									</div>
-								</div>
-							</li>
-						</ul>
+					<div id="tblParent" class="type_select">
+						<table class="tbl tbl_type1">
+							<thead class="tblhead">
+								<tr>
+									<th class="tit_select">선택</th>
+									<th class="tit_address">주소</th>
+									<th class="tit_receive">받으실 분</th>
+									<th class="tit_phone">연락처</th>
+									<th class="tit_delivery">배송유형</th>
+									<th class="tit_modify">수정</th>
+								</tr>
+							</thead>
+							<tbody id="addrList">
+								<tr>
+									<td class="select type-radio">
+										<label class="skin_checkbox">
+											<input type="radio" name="addrNo" value="1" checked>
+											<span class="C_ico"></span>
+										</label>
+									</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>

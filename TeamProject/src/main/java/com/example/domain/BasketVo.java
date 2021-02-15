@@ -12,9 +12,12 @@ import lombok.ToString;
 public class BasketVo {
 	
 	private int cartId;
-	private String consumerID;
+	private String consumerId;
 	private String goodsName;
 	private int amount;
 	private int salePrice;
+	private String uuid;
+	private String filename1;
+	private String uploadpath;
 	
 }

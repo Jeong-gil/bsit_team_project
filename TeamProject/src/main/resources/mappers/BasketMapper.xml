@@ -7,13 +7,13 @@
 	<!-- 장바구니 단일 상품 제거 -->
 	<delete id="deleteOne">
 		DELETE FROM jolly_cart WHERE (consumer_id =
-		#{consumerID}) AND (goods_name = #{goodsName});
+		#{consumerId}) AND (goods_name = #{goodsName});
 	</delete>
 
 	<!-- 장바구니 추가하기 -->
 	<insert id="addBasket">
 		INSERT INTO jolly_cart (`consumer_id`, `goods_name`,
-		`amount`) VALUES (#{consumerID}, #{goodsName}, #{amount});
+		`amount`) VALUES (#{consumerId}, #{goodsName}, #{amount});
 	</insert>
 
 	<!-- 회원 장바구니 정보 불러오기 -->
@@ -24,14 +24,30 @@
 			, jg.goods_name
 		    , jc.amount
 		    , jg.sale_price
+            , atc.uuid
+            , atc.filename1
+            , atc.uploadpath
 		FROM
 			jollygoods AS jg
-		LEFT JOIN
+		LEFT OUTER JOIN
 			jolly_cart AS jc
 		ON
 			jg.goods_name = jc.goods_name
+		LEFT OUTER JOIN
+			attach AS atc
+		ON
+			atc.attach_name = jc.goods_name
 		WHERE
-			jc.consumer_id = #{consumerID};
+			jc.consumer_id = #{consumerId} AND atc.main = 'O';
 	</select>
+	
+	<!-- 장바구니 선택 상품 제거 -->
+	<delete id="deleteSelection">
+		DELETE FROM jolly_cart WHERE (consumer_id =
+		#{consumerId}) AND goods_name IN
+		<foreach collection="delGoodsNames" item="delGoodsName" open="(" separator="," close=")">
+			#{delGoodsName}
+		</foreach>
+	</delete>
 
 </mapper>

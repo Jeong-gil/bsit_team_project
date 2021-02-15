@@ -7,12 +7,15 @@ import com.example.domain.BasketVo;
 public interface BasketMapper {
 
 	// 장바구니 단일 상품 제거
-	void deleteOne(String consumerID, String goodsName);
+	void deleteOne(String consumerId, String goodsName);
 
 	// 장바구니 목록 추가
-	void addBasket(String consumerID, String goodsName, int amount);
+	void addBasket(String consumerId, String goodsName, int amount);
 
 	// 회원 장바구니 정보 불러오기
-	List<BasketVo> getMemberBasket(String consumerID);
+	List<BasketVo> getMemberBasket(String consumerId);
+
+	// 장바구니 선택 상품 제거
+	void deleteSelection(String consumerId, List<String> delGoodsNames);
 
 }

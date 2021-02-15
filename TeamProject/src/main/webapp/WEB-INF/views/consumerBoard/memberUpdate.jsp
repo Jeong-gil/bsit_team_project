@@ -177,7 +177,6 @@
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
-
 .Jline {
 	margin-top: 20px;
 }
@@ -185,106 +184,12 @@
 	font-weight: bold;
 	font-size: 25px;
 }
-
-
-.JlineUl {
-	padding-top: 10px;
-	border-top: 2px solid #ea97ad;
+.JlineHeaderS{
+	margin-top: 20px;
+	font-weight: bold;
 }
 
-.Jdate {
-	padding-top: 20px;
-	font-size: 16px;
-	line-height: 24px;
-	font-weight: 700;
-	color: #666;
-}
 
-.Jgoods {
-	position: relative;
-	margin-top: 10px;
-	padding: 0 20px;
-	border: 1px solid #dddfe1;
-}
-
-.JgoodsName {
-	padding: 20px 0 13px;
-	border-bottom: 1px solid #dddfe1;
-}
-.Jgoodsname {
-	display: block;
-	overflow: hidden;
-	/* background: url(""); */
-	font-size: 16px;
-	line-height: 24px;
-	font-weight: 700;
-	color: #000;
-	cursor: pointer;
-}
-.order_info {
-    overflow: hidden;
-    padding: 14px 0 20px;
-}
-.goodsImg {
-	float:left;
-	width: 60px;
-	margin-right: 20px;
-}
-.goodsImg img {
-	width: 60px;
-	height: auto;
-}
-.Jex {
-	overflow: hidden;
-	padding-top: 1px;
-}
-.order_info:first-child {
-	padding-top: 3px;
-}
-.order_info dl {
-	overflow: hidden;
-}
-.order_info dt {
-	float: left;
-	padding-right: 15px;
-	font-size: 12px;
-	color: #000;
-	line-height: 20px;
-}
-.order_info dd {
-	float: left;
-	font-size: 14px;
-	line-height: 20px;
-	font-weight: 700;
-	color: #000;
-}
-.order_info .order_end {
-	color: #ea97ad;
-}
-.order_status {
-	display: table;
-	position: absolute;
-	right: 20px;
-	bottom: 0;
-	height: 114px;
-	vertical-align: middle;
-}
-.inner_status {
-	display: table-cell;
-	vertical-align: middle;
-}
-.order_status .link {
-	display: block;
-	width: 100px;
-	height: 34px;
-	border: 1px solid #ea97ad;
-	background-color: #fff;
-	font-size: 12px;
-	color: #ea97ad;
-	line-height: 32px;
-	text-align: center;
-	cursor: pointer;
-}
 </style>
 </head>
 <body>
@@ -354,58 +259,72 @@
 					<h2 class="tit_snb">마이컬리</h2>
 					<div class="inner_snb">
 						<ul class="list_menu">
-							<li class="on"><a href="/consumerBoard/cboard">주문내역</a></li>
+							<li><a href="/consumerBoard/cboard">주문내역</a></li>
 							<li><a href="/consumerBoard/shipping">배송지 관리</a></li>
 							<li><a href="/consumerBoard/alwaysLiving">늘 사는 것</a></li>
 							<li><a href="/consumerBoard/goodsReview">상품 후기</a></li>
 							<li><a href="/consumerBoard/savings">적립금</a></li>
 							<li><a href="/consumerBoard/coupon">쿠폰</a></li>
-							<li><a href="/consumerBoard/memberUpdate">개인 정보 수정</a></li>
+							<li class="on"><a href="/consumerBoard/memberUpdate">개인 정보 수정</a></li>
 						</ul>
 					</div>
 				</div>
 				<div class="page_section">
 					<div class="head_aticle Jline">
 						<h2 class="tit Jlineheader">
-							주문내역 <span class="tit_sub">지난 3년간의 주문 내역 조희가 가능합니다</span>
+							개인 정보 수정<br><br>
+							<h2 class="JlineHeaderS">비밀번호재확인<h2><br>
+							<span class="tit_sub">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</span>
 						</h2>
 					</div>
-					<div>
-						<ul class="JlineUl">
-							<li>
-								<div class="Jdate">ex)2021.02.05 (10시 45분)</div>
-								<div class="Jgoods">
-									<div class="JgoodsName">
-										<a class="Jgoodsname">ex)[택배배송] 제주 삼다수 2종 외4건</a>
-									</div>
-									<div class="order_info">
-										<div class="goodsImg">
-											<img alt="상품이미지" src="">
+					<form name="frmList" action="#" onsubmit="">
+						<input type="hidden" name="id" value="notice">
+						<table width="100%" align="center" cellpadding="0" cellspacing="0">
+							<tbody>
+								<tr>
+									<td>
+										<div
+											class="xans-element- xans-myshop xans-myshop-couponserial ">
+											<table width="100%" class="xans-board-listheader jh"
+												cellpadding="0" cellspacing="0">
+												<thead>
+													<tr>
+														<th>번호</th>
+														<th>제목</th>
+														<th>작성자</th>
+														<th>작성일</th>
+														<th>조회</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:choose>
+														<c:when test="${ not empty jnoticeList }">
+
+															<c:forEach var="jnotice" items="${ jnoticeList }">
+																<tr>
+																	<td width="50" align="center">공지</td>
+																	<td
+																		style="padding-left: 10px; text-align: left; color: #999">
+																		<a href="#"><b>${ jnotice.title }</b></a>
+
+																	</td>
+																	<td width="100" align="center">${ jnotice.id }</td>
+																	<td width="100" align="center" class="eng2"><fmt:formatDate
+																			value="${ jnotice.regDate }" pattern="yyyy.MM.dd" /></td>
+																	<td width="30" align="center" class="eng2">${ jnotice.readcount }</td>
+																</tr>
+															</c:forEach>
+														</c:when>
+													</c:choose>
+												</tbody>
+											</table>
 										</div>
-										<div class="Jex">
-											<dl>
-												<dt>주문번호</dt>
-												<dd>ex)1561651651</dd>
-											</dl>
-											<dl>
-												<dt>결제금액</dt>
-												<dd>ex)10,999</dd>
-											</dl>
-											<dl>
-												<dt>주문상태</dt>
-												<dd class="order_end">배송완료</dd>
-											</dl>
-										</div>
-									</div>
-									<div class="order_status">
-										<span class="inner_status">
-											<a class="link">1:1문의</a>
-										</span>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+					</form>
 				</div>
 			</div>
 
