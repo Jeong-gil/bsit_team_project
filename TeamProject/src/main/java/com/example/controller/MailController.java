@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.service.MailService;
 import com.example.service.MemberService;
 
+import lombok.extern.java.Log;
+
+@Log
+@RequestMapping("/mail/*")
 @Controller
 public class MailController {
 
@@ -23,7 +27,7 @@ public class MailController {
 	@Autowired
 	private MemberService memberService;
 
-	@RequestMapping("/mail/doSend")
+	@RequestMapping("/doSend")
 	@ResponseBody
 	public String doSend(String email) {
 
@@ -44,6 +48,17 @@ public class MailController {
 		Map<String, Object> sendRs = mailService.send(email, randomNum);
 
 		memberService.addRandom(randomNum);
+
+		return (String) sendRs.get("msg");
+	}
+	
+	@RequestMapping("/pwFindSend")
+	@ResponseBody
+	public String pwFindSend(String email, String pw) {
+
+		log.info("email = " + email);
+		
+		Map<String, Object> sendRs = mailService.pwFindSend(email, pw);
 
 		return (String) sendRs.get("msg");
 	}

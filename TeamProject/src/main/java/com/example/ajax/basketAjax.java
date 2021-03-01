@@ -25,47 +25,56 @@ import lombok.extern.java.Log;
 @RequestMapping("/basket/*")
 @Log
 public class basketAjax {
-	
+
 	@Autowired
 	private BasketService basketService;
-	
-	@PostMapping(
-			value = "/add", 
-			consumes = MediaType.APPLICATION_JSON_VALUE, 
-			produces = MediaType.APPLICATION_JSON_VALUE)
-	public void add(
-			@RequestBody Map<String, Object> params,
-			HttpSession session) 
-	{
+
+	@PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public void add(@RequestBody Map<String, Object> params, HttpSession session) {
 		String consumerId = (String) session.getAttribute("id");
-		
+
 		basketService.addBasket(consumerId, (String) params.get("goodsName"), (int) params.get("amount"));
 	}
-	
+
 	@DeleteMapping(value = "/delItem")
 	public ResponseEntity<Map<String, Object>> delSingleItem(@RequestBody BasketVo basketVo) {
 		System.out.println("basketVo: " + basketVo);
-		List<BasketVo> basketVoList = basketService.DeleteAndBasketListLoad(basketVo.getCartId(), basketVo.getConsumerId(), basketVo.getGoodsName());
-		
+		List<BasketVo> basketVoList = basketService.DeleteAndBasketListLoad(basketVo.getCartId(),
+				basketVo.getConsumerId(), basketVo.getGoodsName());
+
 		Map<String, Object> map = new HashMap<>();
 		map.put("basketVoList", basketVoList);
-		
+
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping(value = "/delItems")
 	public ResponseEntity<Map<String, Object>> delSingleItem(@RequestBody Map<String, Object> params) {
 		System.out.println("params: " + params);
-		
+
 		String consumerId = (String) params.get("consumerId");
 		List<String> delGoodsNames = (List<String>) params.get("delGoodsNames");
-		
+
 		List<BasketVo> basketVoList = basketService.DeleteSelectionAndBasketListLoad(consumerId, delGoodsNames);
-		
+
 		Map<String, Object> map = new HashMap<>();
 		map.put("basketVoList", basketVoList);
-		
+
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 	}
-	
+
+	@PostMapping(value = "/updateCart")
+	public void updateCart(@RequestBody Map<String, Object> params) {
+		
+		System.out.println("updateCart, params: " + params);
+		System.out.println("updateCart, params.get(\"basketVoList\"): " + params.get("basketVoList"));
+		
+		List<BasketVo> basketVos = (List<BasketVo>) params.get("basketVoList");
+		
+		basketService.updateCart(basketVos);
+		
+		System.out.println("test99, basketVos: " + basketVos);
+		
+	}
+
 }

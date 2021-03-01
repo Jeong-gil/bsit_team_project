@@ -11,5 +11,8 @@ public interface AttachMapper {
 	List<AttachVo> getAttachesByName(String attachName);
 	
 	void deleteAttachesByName(String goodsName);
-
+	
+	int getFileNum(String attachName, String main);
+	
+	void deleteAttachbyNum(int num);
 }

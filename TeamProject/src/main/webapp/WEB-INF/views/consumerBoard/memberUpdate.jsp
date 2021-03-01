@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -178,158 +178,93 @@
     background-position: 50% 50%;
 }
 .Jline {
-	margin-top: 20px;
+   margin-top: 20px;
 }
 .Jlineheader{
-	font-weight: bold;
-	font-size: 25px;
+   font-weight: bold;
+   font-size: 25px;
 }
 .JlineHeaderS{
-	margin-top: 20px;
-	font-weight: bold;
+   margin-top: 20px;
+   font-weight: bold;
 }
 
 
 </style>
 </head>
 <body>
-	<div id="main">
-		<div id="content">
-			<div class="page_aticle aticle_type2">
-			
-				<div id="myPageTop" class="page_aticle mypage_top">
-					<div class="mypagetop_user">
-						<div class="inner_mypagetop">
-							<div class="grade_user">
-								<div class="grade">
-									<span class="screen_out">등급</span> 
-									<span class="ico_grade class0">
-										<span class="inner_grade">
-											<span class="in_grade">일반</span>
-										</span>
-									</span>
-									<div class="grade_bnenfit">
-										<div class="user">
-											<strong class="name">신우경</strong> 
-											<span class="txt">님</span>
-										</div>
-										<div class="benefit">
-											<strong class="tit">첫구매 우대 - </strong>적립 5%
-										</div>
-										<div class="benefit">
-											<strong class="tit">첫구매 우대 - </strong>20,000원 이상 무료 배송
-										</div>
-										<div class="benefit"></div>
-									</div>
-								</div>
-								<div class="next">
-									<a href="#" class="total_grade">전체등급 보기</a> 
-									<a href="#" class="next_month">다음 달 예상등급 보기</a>
-								</div>
-							</div>
-							<ul class="list_mypage">
-								<li class="user_reserve">
-									<div class="link">
-										<div class="tit">적립금
-										</div>
-										<a href="#" class="info"> 0 원
-											<span class="date">소멸 예정 0 원</span>
-										</a>
-									</div>
-								</li>
-								<li class="user_coupon"><div class="link">
-									<div class="tit">쿠폰	</div>
-										<a href="#" class="info">1 개
-										</a>
-									</div>
-								</li>
-								<li class="user_kurlypass"><div class="link">
-										<div class="tit">컬리패스</div>
-										<a href="#" class="info info_link">	알아보기 
-										</a>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				
-				
-				<div id="snb" class="snb_cc">
-					<h2 class="tit_snb">마이컬리</h2>
-					<div class="inner_snb">
-						<ul class="list_menu">
-							<li><a href="/consumerBoard/cboard">주문내역</a></li>
-							<li><a href="/consumerBoard/shipping">배송지 관리</a></li>
-							<li><a href="/consumerBoard/alwaysLiving">늘 사는 것</a></li>
-							<li><a href="/consumerBoard/goodsReview">상품 후기</a></li>
-							<li><a href="/consumerBoard/savings">적립금</a></li>
-							<li><a href="/consumerBoard/coupon">쿠폰</a></li>
-							<li class="on"><a href="/consumerBoard/memberUpdate">개인 정보 수정</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="page_section">
-					<div class="head_aticle Jline">
-						<h2 class="tit Jlineheader">
-							개인 정보 수정<br><br>
-							<h2 class="JlineHeaderS">비밀번호재확인<h2><br>
-							<span class="tit_sub">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</span>
-						</h2>
-					</div>
-					<form name="frmList" action="#" onsubmit="">
-						<input type="hidden" name="id" value="notice">
-						<table width="100%" align="center" cellpadding="0" cellspacing="0">
-							<tbody>
-								<tr>
-									<td>
-										<div
-											class="xans-element- xans-myshop xans-myshop-couponserial ">
-											<table width="100%" class="xans-board-listheader jh"
-												cellpadding="0" cellspacing="0">
-												<thead>
-													<tr>
-														<th>번호</th>
-														<th>제목</th>
-														<th>작성자</th>
-														<th>작성일</th>
-														<th>조회</th>
-													</tr>
-												</thead>
-												<tbody>
-													<c:choose>
-														<c:when test="${ not empty jnoticeList }">
+   <div id="main">
+      <div id="content">
+         <div class="page_aticle aticle_type2">
+         
+               <!-- 멤버 정보 -->
+            <jsp:include page="/WEB-INF/views/include/memberInfo_.jsp" />
+            
+               <!-- 사이드메뉴  -->
+            <jsp:include page="/WEB-INF/views/include/sideMenu_.jsp" />
+            
+            
+            <div class="page_section">
+               <div class="head_aticle Jline">
+                  <h2 class="tit Jlineheader">
+                     개인 정보 수정<br><br>
+                     <h2 class="JlineHeaderS">비밀번호재확인</h2><br>
+                     <span class="tit_sub">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</span>
+                  </h2>
+               </div>
+               <form name="frmList" action="#" onsubmit="">
+                  <input type="hidden" name="id" value="notice">
+                  <table width="100%" align="center" cellpadding="0" cellspacing="0">
+                     <tbody>
+                        <tr>
+                           <td>
+                              <div
+                                 class="xans-element- xans-myshop xans-myshop-couponserial ">
+                                 <table width="100%" class="xans-board-listheader jh"
+                                    cellpadding="0" cellspacing="0">
+                                    <thead>
+                                       <tr>
+                                          <th>번호</th>
+                                          <th>제목</th>
+                                          <th>작성자</th>
+                                          <th>작성일</th>
+                                          <th>조회</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                       <c:choose>
+                                          <c:when test="${ not empty jnoticeList }">
 
-															<c:forEach var="jnotice" items="${ jnoticeList }">
-																<tr>
-																	<td width="50" align="center">공지</td>
-																	<td
-																		style="padding-left: 10px; text-align: left; color: #999">
-																		<a href="#"><b>${ jnotice.title }</b></a>
+                                             <c:forEach var="jnotice" items="${ jnoticeList }">
+                                                <tr>
+                                                   <td width="50" align="center">공지</td>
+                                                   <td
+                                                      style="padding-left: 10px; text-align: left; color: #999">
+                                                      <a href="#"><b>${ jnotice.title }</b></a>
 
-																	</td>
-																	<td width="100" align="center">${ jnotice.id }</td>
-																	<td width="100" align="center" class="eng2"><fmt:formatDate
-																			value="${ jnotice.regDate }" pattern="yyyy.MM.dd" /></td>
-																	<td width="30" align="center" class="eng2">${ jnotice.readcount }</td>
-																</tr>
-															</c:forEach>
-														</c:when>
-													</c:choose>
-												</tbody>
-											</table>
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+                                                   </td>
+                                                   <td width="100" align="center">${ jnotice.id }</td>
+                                                   <td width="100" align="center" class="eng2"><fmt:formatDate
+                                                         value="${ jnotice.regDate }" pattern="yyyy.MM.dd" /></td>
+                                                   <td width="30" align="center" class="eng2">${ jnotice.readcount }</td>
+                                                </tr>
+                                             </c:forEach>
+                                          </c:when>
+                                       </c:choose>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
 
-					</form>
-				</div>
-			</div>
+               </form>
+            </div>
+         </div>
 
-		</div>
-	</div>
-	<jsp:include page="/WEB-INF/views/include/footer_.jsp" />
+      </div>
+   </div>
+   <jsp:include page="/WEB-INF/views/include/footer_.jsp" />
 </body>
 </html>

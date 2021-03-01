@@ -23,7 +23,6 @@ public class JNoticeService {
       return jnoticeMapper.getJNoticesBySearch(startRow, pageSize, category, search);
    }
    
-   
    public int getCountBySearch(String category, String search) {
       int count = jnoticeMapper.getCountBySearch(category, search);
       return count;
@@ -42,6 +41,12 @@ public class JNoticeService {
    public void updateReadcount(int num) {
       jnoticeMapper.updateReadcount(num);
    }
-   
-   
+   // 공지삭제
+   public void deleteJNoticeByNum(int num) {
+      jnoticeMapper.deleteJNoticeByNum(num);
+   }
+   // 수정
+   public void updateBoard(JNoticeVo jnoticeVo) {
+      jnoticeMapper.updateBoard(jnoticeVo);
+   }
 }

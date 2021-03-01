@@ -17,7 +17,7 @@
 	border-bottom: 1px solid #f7f7f7;
 }
 /* div { */
-/* 	word-break: break-all; */
+/*    word-break: break-all; */
 /* } */
 /* *{ */
 /* box-sizing: border-box; */
@@ -47,7 +47,7 @@ element.style {
 }
 
 .only_pc {
-	/* 	width: 1050px; */
+	/*    width: 1050px; */
 	margin: 100px;
 }
 
@@ -601,47 +601,60 @@ input[type=checkbox] {
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="/js/bootstrap.min.js"></script>
-	<form>
+	<form method="post" action="/member/orderSheet">
 		<div id="main">
 			<div id="content">
 				<div id="cartItemList" class="only_pc" style="min-height: 563px;">
 					<div class="empty">
 						<div id="y_contained_goods" class="row" style="min-width: 1400px;">
+<!-- 						<input type="hidden" id="order_link" name="order_link"> -->
+						<input type="hidden" name="id" value="${ sessionScope.id }">
 							<div class="col-lg-9">
 								<table class="table">
 									<thead>
 										<tr>
-											<th style="width: 20px"><input id="allcheck" type="checkbox"></th>
-											<th style="font-size: 17px; font-weight: 700;">전체선택
-												({{ SelectedNumber }}/{{ basketVos.length }})</th>
-											<th id="select_del" style="font-size: 17px; font-weight: 700;" colspan="3"><span style="cursor: pointer;">선택삭제</span></th>
+											<th style="width: 20px"><input id="allcheck"
+												type="checkbox"></th>
+											<th class="col-md-2" style="font-size: 17px; font-weight: 700;">전체선택 ({{
+												SelectedNumber }}/{{ basketVos.length }})</th>
+											<th id="select_del"
+												style="font-size: 17px; font-weight: 700;" colspan="3"><span
+												style="cursor: pointer;">선택삭제</span></th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr v-for="(basketVo, index) in basketVos" v-bind:key="index">
-											<th style="vertical-align: middle;">
-												<input name="chk" type="checkbox">
+											<th style="vertical-align: middle;"><input name="chk"
+												type="checkbox"></th>
+											<th class="col-md-2"><a
+												v-bind:href="'/goods/productDetail?goodsName=' + basketVo.goodsName">
+													<img
+													v-bind:src="'/upload/' + basketVo.uploadpath + '/' + basketVo.uuid + '_' + basketVo.filename1"
+													style="width: 70px; height: 90px; object-fit: cover;"
+													alt="">
+											</a></th>
+											<th class="col-md-4"
+												style="vertical-align: middle; font-size: 19px; font-weight: 700;">
+												<a
+												v-bind:href="'/goods/productDetail?goodsName=' + basketVo.goodsName"
+												style="text-decoration: none; color: black;"> {{
+													basketVo.goodsName }} </a>
 											</th>
-											<th>
-												<a v-bind:href="'/goods/productDetail?goodsName=' + basketVo.goodsName">
-													<img v-bind:src="'/upload/' + basketVo.uploadpath + '/' + basketVo.uuid + '_' + basketVo.filename1" style="width: 70px; height: 90px; object-fit: cover;" alt="">
-												</a>
-											</th>
-											<th style="vertical-align: middle; font-size: 19px; font-weight: 700;">
-												<a v-bind:href="'/goods/productDetail?goodsName=' + basketVo.goodsName" style="text-decoration: none; color: black;">
-													{{ basketVo.goodsName }}
-												</a>
-											</th>
-											<th style="padding: 25px 0px;">
-												<input type="number" readonly style="height: 30px; width: 80px; text-align: center; font-size: 15px;" v-model="basketVo.amount">
+											<th class="col-md-3" style="padding: 25px 0px;"><input type="number"
+												readonly
+												style="height: 30px; width: 80px; text-align: center; font-size: 15px;"
+												v-model="basketVo.amount">
 												<div class="btn-group" role="group" aria-label="...">
-													<button type="button" class="btn btn-default" v-on:click="decreaseQuantity(index)">➖</button>
-													<button type="button" class="btn btn-default" v-on:click="increaseQuantity(index)">➕</button>
-												</div>
-											</th>
-											<th style="vertical-align: middle; font-weight: 700; font-size: 20px; text-align: right;">
+													<button type="button" class="btn btn-default"
+														v-on:click="decreaseQuantity(index)">➖</button>
+													<button type="button" class="btn btn-default"
+														v-on:click="increaseQuantity(index)">➕</button>
+												</div></th>
+											<th class="col-md-3"
+												style="vertical-align: middle; font-weight: 700; font-size: 20px; text-align: right;">
 												{{ basketVo.salePrice * basketVo.amount | comma }}원
-												<button type="button" class="btn btn-default" v-on:click="delItem(index)">X</button>
+												<button type="button" class="btn btn-default"
+													v-on:click="delItem(index)">X</button>
 											</th>
 										</tr>
 									</tbody>
@@ -650,26 +663,31 @@ input[type=checkbox] {
 							<div class="col-lg-3">
 								<div class="cart_result">
 									<div class="inner_result" style="top: 60px;">
-<!-- 										<div class="cart_delivery"> -->
-<!-- 											<h3 class="tit">배송지</h3> -->
-<!-- 											<div class="no_address"> -->
-<!-- 												<span class="emph">배송지를 입력</span>하고 <br>배송유형을 확인해 보세요! -->
-<!-- 												<a href="#" class="btn default"> <span class="ico"></span>주소 -->
-<!-- 													검색 -->
-<!-- 												</a> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
+										<!--                               <div class="cart_delivery"> -->
+										<!--                                  <h3 class="tit">배송지</h3> -->
+										<!--                                  <div class="no_address"> -->
+										<!--                                     <span class="emph">배송지를 입력</span>하고 <br>배송유형을 확인해 보세요! -->
+										<!--                                     <a href="#" class="btn default"> <span class="ico"></span>주소 -->
+										<!--                                        검색 -->
+										<!--                                     </a> -->
+										<!--                                  </div> -->
+										<!--                               </div> -->
 										<div class="amount_view">
 											<dl class="amount">
 												<dt class="tit">상품금액</dt>
 												<dd class="price">
-													<span class="num">0</span><span class="won">원</span>
+													<span class="num">{{ getTotalOriginPrice | comma }}</span><span class="won">원</span>
 												</dd>
 											</dl>
 											<dl class="amount">
 												<dt class="tit">상품할인금액</dt>
 												<dd class="price">
-													<span class="num">0</span><span class="won">원</span>
+													<span v-if="getDiscountTotalPrice > 0">
+														<span class="num">-{{ getDiscountTotalPrice | comma }}</span><span class="won">원</span>
+													</span>
+													<span v-else>
+														<span class="num">0</span><span class="won">원</span>
+													</span>
 												</dd>
 											</dl>
 											<dl class="amount">
@@ -681,13 +699,18 @@ input[type=checkbox] {
 											<dl class="amount lst">
 												<dt class="tit">결제예정금액</dt>
 												<dd class="price">
-													<span class="num">{{ getTotalPrice | comma }}</span><span class="won">원</span>
+													<span class="num" style="font-weight: 700; font-size: 22px;">{{ getTotalPrice | comma }}</span><span
+														class="won">원</span>
 												</dd>
 											</dl>
 											<div class="reserve"></div>
 										</div>
 										<div class="btn_submit">
-											<button type="submit" class="btn disabled">상품을 담아주세요</button>
+											<button v-if="basketVos.length > 0" type="submit"
+												class="btn Sbtn-primary btn-lg" style="padding: 20px 110px;">주문하기</button>
+											<button v-else type="button"
+												class="btn Sbtn-primary btn-lg" style="padding: 20px 70px;"
+												disabled>상품을 담아주세요</button>
 										</div>
 										<div class="notice">
 											<span class="txt"> <span class="ico">·</span>‘입금확인’
@@ -709,9 +732,9 @@ input[type=checkbox] {
 	<jsp:include page="/WEB-INF/views/include/footer_.jsp" />
 
 	<script>
-	// 체크박스 전체 채우기
+   // 체크박스 전체 채우기
     $(document).ready(function () {
-		$("#allcheck").click(function () {
+      $("#allcheck").click(function () {
             if ($("#allcheck").prop("checked")) {
                 $("input[name=chk]").prop("checked", true);
             } else {
@@ -723,146 +746,210 @@ input[type=checkbox] {
     // 선택한 항목 삭제
     $(document).ready(function () {
         let delList = [];
-		$('#select_del').click(function () {
-			delList = [];
-			$("input[name=chk]").each(function(index, item) {
-				if ($(item).prop("checked")) {
-					delList.push(app.basketVos[index].goodsName);
-				}
-			});
-			console.log(delList);
-			
-			let id = '';
-			if (${ null ne sessionScope.id }) {
-				id = '${ sessionScope.id }';
-			}
+      $('#select_del').click(function () {
+         delList = [];
+         $("input[name=chk]").each(function(index, item) {
+            if ($(item).prop("checked")) {
+               delList.push(app.basketVos[index].goodsName);
+            }
+         });
+         console.log(delList);
+         
+         let id = '';
+         if (${ null ne sessionScope.id }) {
+            id = '${ sessionScope.id }';
+         }
 
-			let obj = {
-					consumerId: id,
-					delGoodsNames: delList
-			};
-			console.log(obj);
+         let obj = {
+               consumerId: id,
+               delGoodsNames: delList
+         };
+         console.log(obj);
 
-			let str = JSON.stringify(obj);
-			console.log(str);
+         let str = JSON.stringify(obj);
+         console.log(str);
 
-			if (!delList.length == 0) {
-				$.ajax({
-					url: '/basket/delItems',
-					method: 'DELETE',
-					data: str,
-					contentType: 'application/json; charset=UTF-8',
-					success: function (response) {
-						console.log(response);
-						console.log('response.basketVoList: ' + response.basketVoList);
-						app.basketVos = response.basketVoList;
-					},
-					error: function () {
-						alert('장바구니 선택 삭제 오류');
-					}
-				});
-			}
-			
-			
-		});
+         if (delList.length > 0) {
+            $.ajax({
+               url: '/basket/delItems',
+               method: 'DELETE',
+               data: str,
+               contentType: 'application/json; charset=UTF-8',
+               success: function (response) {
+                  console.log(response);
+                  console.log('response.basketVoList: ' + response.basketVoList);
+                  app.basketVos = response.basketVoList;
+                  app.SelectedNumber = app.basketVos.length;
+               },
+               error: function () {
+                  alert('장바구니 선택 삭제 오류');
+               }
+            });
+         }
+         
+         
+      });
     });
     
-	// 전체선택 체크박스 클릭시, 선택한 항목 갯수 구하기
+   // 전체선택 체크박스 클릭시, 선택한 항목 갯수 구하기
     $(document).ready(function () {
-		//최상단 체크박스 클릭
-		$("#allcheck").click(function () {
+      //최상단 체크박스 클릭
+      $("#allcheck").click(function () {
             if ($("#allcheck").prop("checked")) {
-            	app.SelectedNumber = app.basketVos.length;
+               app.SelectedNumber = app.basketVos.length;
             } else {
-            	app.SelectedNumber = 0;
+               app.SelectedNumber = 0;
             }
         });
     });
 
     // 각 체크박스 클릭시, 선택한 항목 갯수 구하기
     $(document).ready(function () {
-		$("input[name=chk]").click(function () {
-			SelectedNumber = [];
-			$("input[name=chk]").each(function(index, item) {
-				if ($(item).prop("checked")) {
-					SelectedNumber.push(0);
-				}
-				app.SelectedNumber = SelectedNumber.length;
-			});
+      $("input[name=chk]").click(function () {
+         SelectedNumber = [];
+         $("input[name=chk]").each(function(index, item) {
+            if ($(item).prop("checked")) {
+               SelectedNumber.push(0);
+            }
+            app.SelectedNumber = SelectedNumber.length;
+         });
         });
     });
 
+    window.onbeforeunload = function(){
+
+        if (app.basketVos.length > 0) {
+
+        	let obj = {
+                    basketVoList: app.basketVos
+            };
+            console.log('window.onbeforeunload,  basketVos: ' + obj);
+
+            let str = JSON.stringify(obj);
+            console.log('window.onbeforeunload,  basketVos: ' + str);
+
+            
+        	$.ajax({
+                url: '/basket/updateCart',
+                method: 'POST',
+                data: str,
+                contentType: 'application/json; charset=UTF-8',
+                success: function (response) {
+                   console.log(response);
+                },
+                error: function () {
+                   alert('테스트 오류');
+                }
+             });
+			
+        }
+
+        
+    }
+
+//     function ConvertBasketData() {
+        
+//         let strBasketVos = JSON.stringify(app.basketVos);
+//         alert( strBasketVos );
+        
+//     	$("#order_link").val(strBasketVos);
+    	
+//     }
+
+
 // Vue /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	let app = new Vue({
-		el: '#y_contained_goods',
+   
+   let app = new Vue({
+      el: '#y_contained_goods',
 
-		data: {
-			basketVos: ${ strbasketVos },
-			SelectedNumber: 0
-		},
+      data: {
+         basketVos: ${ strbasketVos },
+         SelectedNumber: 0
+      },
 
-		methods: {
-			increaseQuantity: function (index) {
-				if (this.basketVos[index].amount < 100) {
-					this.basketVos[index].amount++;
-				}
-			},
+      methods: {
+         increaseQuantity: function (index) {
+            if (this.basketVos[index].amount < 100) {
+               this.basketVos[index].amount++;
+            }
+         },
 
-			decreaseQuantity: function (index) {
-				if (this.basketVos[index].amount > 0) {
-					this.basketVos[index].amount--;
-				}
-			},
+         decreaseQuantity: function (index) {
+            if (this.basketVos[index].amount > 1) {
+               this.basketVos[index].amount--;
+            }
+         },
 
-			delItem: function (index) {
-				let vm = this;
+         delItem: function (index) {
+            let vm = this;
 
-				let obj = {
-						cartId: this.basketVos[index].cartId,
-						consumerId: this.basketVos[index].consumerId,
-						goodsName: this.basketVos[index].goodsName
-				};
-				console.log(obj);
+            let obj = {
+                  cartId: this.basketVos[index].cartId,
+                  consumerId: this.basketVos[index].consumerId,
+                  goodsName: this.basketVos[index].goodsName
+            };
+            console.log(obj);
 
-				let str = JSON.stringify(obj);
-				console.log(str);
-				
-				$.ajax({
-					url: '/basket/delItem',
-					method: 'DELETE',
-					data: str,
-					contentType: 'application/json; charset=UTF-8',
-					success: function (response) {
-						console.log(response);
-						console.log('response.basketVoList: ' + response.basketVoList);
-						vm.basketVos = response.basketVoList;
-					},
-					error: function () {
-						alert('장바구니 단일 삭제 오류');
-					}
-				});
-			}
+            let str = JSON.stringify(obj);
+            console.log(str);
+            
+            $.ajax({
+               url: '/basket/delItem',
+               method: 'DELETE',
+               data: str,
+               contentType: 'application/json; charset=UTF-8',
+               success: function (response) {
+                  console.log(response);
+                  console.log('response.basketVoList: ' + response.basketVoList);
+                  vm.basketVos = response.basketVoList;
+               },
+               error: function () {
+                  alert('장바구니 단일 삭제 오류');
+               }
+            });
+         }
 
-		},
+      },
 
-		computed: {
-			getTotalPrice: function () {
-				let totalPrice = 0;
-				for (let i=0; i<this.basketVos.length; i++) {
-					totalPrice += this.basketVos[i].salePrice * this.basketVos[i].amount;
-				}
-				return totalPrice;
-			}
-		},
+      computed: {
+         getTotalPrice: function () {
+            let totalPrice = 0;
+            for (let i=0; i<this.basketVos.length; i++) {
+               totalPrice += this.basketVos[i].salePrice * this.basketVos[i].amount;
+            }
+            return totalPrice;
+         }, 
 
-		filters:{
-			comma(val) {
-				return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-			}
-		}
-		
-	});
+         getDiscountTotalPrice: function () {
+             let discountTotalPrice = 0;
+             for (let i=0; i<this.basketVos.length; i++) {
+                 if (this.basketVos[i].originPrice !== 0) {
+                	 discountTotalPrice += (this.basketVos[i].originPrice - this.basketVos[i].salePrice) * this.basketVos[i].amount;
+                 }
+            	 
+             }
+             return discountTotalPrice;
+          },
+
+          getTotalOriginPrice: function () {
+              let originTotalPrice = 0;
+              for (let i=0; i<this.basketVos.length; i++) {
+                  if (this.basketVos[i].originPrice == 0) {
+                	  originTotalPrice += this.basketVos[i].salePrice * this.basketVos[i].amount;
+                  }
+            	  originTotalPrice += this.basketVos[i].originPrice * this.basketVos[i].amount;
+              }
+              return originTotalPrice;
+           }
+      },
+
+      filters:{
+         comma(val) {
+            return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+         }
+      }
+      
+   });
 </script>
 
 </body>

@@ -1,10 +1,16 @@
 package com.example.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.domain.BasketVo;
 import com.example.domain.MemberVo;
+import com.example.domain.OrderDetailsVo;
+import com.example.domain.OrderHistoryVo;
 import com.example.mapper.MemberMapper;
 
 import lombok.extern.java.Log;
@@ -26,6 +32,12 @@ public class MemberService {
 	public int getCountById(String id) {
 		int count = memberMapper.getCountById(id);
 		return count;
+	}
+
+	// 비밀번호 찾기
+	public String getCountFindPw(String name, String id, String email) {
+		String pw = memberMapper.getCountFindPw(name, id, email);
+		return pw;
 	}
 
 	public int userCheck(String id, String pw) {
@@ -73,5 +85,28 @@ public class MemberService {
 	public void addRandom(String randomNum) {
 		memberMapper.addRandom(randomNum);
 	}
+
+	public MemberVo getMemberByID(String id) {
+		MemberVo memberVo = memberMapper.getMemberByID(id);
+		return memberVo;
+	}
+
+	public List<OrderDetailsVo> getOrderDetails(String id) {
+		return memberMapper.getOrderDetails(id);
+	}
+
+	public List<OrderHistoryVo> getOrderHistory(String id, String orderId) {
+		return memberMapper.getOrderHistory(id, orderId);
+	}
+	
+	   public MemberVo getJQuestionById(String id) {
+		      MemberVo memberVo = memberMapper.getJQuestionById(id);
+		      return memberVo;
+		   }
+	   
+	   public MemberVo getMemberInfo(String id) {
+           MemberVo memberVo = memberMapper.getMemberInfo(id);
+           return memberVo;
+        }
 
 }

@@ -43,15 +43,12 @@
                                     <tbody>
                                        <c:choose>
                                           <c:when test="${ not empty jnoticeList }">
-
                                              <c:forEach var="jnotice" items="${ jnoticeList }">
                                                 <tr>
                                                    <td width="50" align="center">공지</td>
-<%--                                                    <input type="hidden" name="num" value="${ jnotice.num }"> --%>
                                                    <td
                                                       style="padding-left: 10px; text-align: left; color: #999">
-                                                      <a
-                                                      href="/userBoard/jcontent?num=${ jnotice.num }&pageNum=${ pageNum }">${ jnotice.title }</a>
+                                                      <a href="/userBoard/jcontent?num=${ jnotice.num }&pageNum=${ pageNum }">${ jnotice.title }</a>
                                                    </td>
                                                    <td width="100" align="center">${ jnotice.id }</td>
                                                    <td width="100" align="center" class="eng2"><fmt:formatDate
@@ -61,11 +58,10 @@
                                              </c:forEach>
                                           </c:when>
                                           <c:otherwise>
-                                             <tr>
-                                                <td>게시물 업다 고치라</td>
-                                             </tr>
+                                             <td class="no_data" style="padding: 150px 0 148px; border-top: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6; font-size: 12px; color: #4c4c4c">
+                                    검색한 공지가 존재하지 않습니다.
+                                 </td>
                                           </c:otherwise>
-
                                        </c:choose>
                                     </tbody>
                                  </table>
@@ -118,11 +114,10 @@
                         <input type="submit" value="검색" class="btn">
 
                         <%-- 로그인 했을때만 [글쓰기] 버튼 보이기 --%>
-                        <c:if test="${ not empty sessionScope.id }">
+                        <c:if test="${ sessionScope.id eq 'admin' }">
                            <input type="button" value="공지쓰기" class="btn"
-                              onclick="location.href='/userBoard/jwrite?pageNum=${ pageNum }'">
+                              onclick="location.href='/userBoard/jnoticeWrite?pageNum=${ pageNum }'">
                         </c:if>
-
                      </form>
                   </div>
                </form>

@@ -33,7 +33,7 @@
 									<th class="fst">아이디 <span class="ico">*</span>
 									</th>
 									<td><input type="text" name="id" maxlength="16"
-										placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합" id="left"
+										placeholder="4자 이상의 영문 혹은 영문과 숫자를 조합" id="left"
 										v-model="inputIdVal" required> <a href="#"
 										class="btn default" v-on:click="idDupChk($event)">중복확인</a><br>
 										<input type="hidden" name="checked_id" value=""
@@ -75,7 +75,7 @@
 										<div id="emailBtn">
 											<input type="text" name="email" maxlength="25"
 												v-model="inputEmailVal" required
-												placeholder="예: marketkurly@kurly.com"> <a href="#"
+												placeholder="예: marketJolly@Jolly.com"> <a href="#"
 												class="btn default" v-on:click="emailChk($event)">중복확인</a>
 										</div>
 										<div id="chkRandom">
@@ -230,8 +230,7 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 	<script src="../js/jquery-3.5.1.js"></script>
-	<script
-		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 	<script>
     

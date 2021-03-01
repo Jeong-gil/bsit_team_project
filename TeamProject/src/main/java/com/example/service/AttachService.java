@@ -31,6 +31,16 @@ public class AttachService {
 		return attachList;
 	}
 	
+	public int getFileNum(String attachName, String main){
+		int num = 0;
+		num = attachMapper.getFileNum(attachName, main);
+		return num;
+	}
+	
+	public void deleteAttachbyNum(int num) {
+		attachMapper.deleteAttachbyNum(num);
+	}
+	
 
 	
 	

@@ -23,5 +23,6 @@ public class MemberVo {
 	private String birthday;
 	private String push;
 	private Timestamp regDate;
+	private int jmembership;
 	
 }

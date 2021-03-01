@@ -9,12 +9,20 @@
 		VALUES (#{uuid}, #{filename1}, #{uploadpath}, #{image}, #{attachName}, #{main})
 	</insert>
 	
+	<select id="getFileNum" resultType="int">
+		SELECT num FROM jolly.attach where attach_name = #{attachName} and main = #{main} and time <![CDATA[ < ]]> now();
+	</select>
+	
 	<select id="getAttachesByName" resultType="attachVo">
 		SELECT * FROM attach WHERE attach_name = #{attachName}
 	</select>
-	
+
 	<delete id="deleteAttachesByName">
 		DELETE FROM attach where attach_name = #{goodsName}
+	</delete>
+	
+	<delete id="deleteAttachbyNum">
+		DELETE FROM attach WHERE num = #{num}
 	</delete>
 
 </mapper>

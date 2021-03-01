@@ -2,6 +2,7 @@ package com.example.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 
 import com.example.domain.JNoticeVo;
@@ -25,7 +26,15 @@ public interface JNoticeMapper {
    
    int getNextNum(String tableName);
    
-   
+   // 조회수
    void updateReadcount(int num);
+   
+   //공지 삭제
+   @Delete("DELETE FROM jnotice WHERE num = #{num}")
+   void deleteJNoticeByNum(int num);
 
+   //수정
+   void updateBoard(JNoticeVo jnoticeVo);
+   
+   
 }

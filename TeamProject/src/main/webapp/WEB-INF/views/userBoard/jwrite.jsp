@@ -35,7 +35,6 @@
                                     <tr>
                                         <th class="input_txt">제목</th>
                                         <td>
-                                            
                                             <input type="text" name="title" style="width:100%" label="제목" value="" required>
                                         </td>
                                     </tr>

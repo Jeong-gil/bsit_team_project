@@ -27,7 +27,6 @@ public class ProductReviewAjax {
 	
 	@GetMapping("/Review/list/{두부}")
 	public ResponseEntity<Map<String, Object>> list(@PathVariable("두부") String name){
-		System.out.println("name" + name);
 		log.info("name" + name);
 		
 		int totalcount = productReviewService.getCountAll();

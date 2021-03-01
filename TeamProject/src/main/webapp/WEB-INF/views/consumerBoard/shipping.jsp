@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -178,237 +178,212 @@
     background-position: 50% 50%;
 }
 .Jline {
-	margin-top: 20px;
+   margin-top: 20px;
 }
 .Jlineheader{
-	font-weight: bold;
-	font-size: 25px;
+   font-weight: bold;
+   font-size: 25px;
 }
 .new_address {
-	position: relative;
+   position: relative;
 }
 .Jbtn {
-	position: absolute;
-	right: 3px;
-	bottom: 7px;
-	border: 0 none;
-	background-color: #fff;
-	font-weight: 700;
-	font-size: 16px;
-	color: #333;
-	line-height: 24px;
-	letter-spacing: -0.5px;
-	text-align: right;
-	outline: none;
+   position: absolute;
+   right: 3px;
+   bottom: 7px;
+   border: 0 none;
+   background-color: #fff;
+   font-weight: 700;
+   font-size: 16px;
+   color: #333;
+   line-height: 24px;
+   letter-spacing: -0.5px;
+   text-align: right;
+   outline: none;
 }
 .ico {
-	margin-right: 2px;
-	vertical-align: -2px;
-	width: 15px;
-	height: 15px;
+   margin-right: 2px;
+   vertical-align: -2px;
+   width: 15px;
+   height: 15px;
 }
 .tbl {
-	border-bottom: 1px solid #f4f4f4;
-	width: 100%;
-	border-collapse: collapse;
-	border-spacing: 0;
+   border-bottom: 1px solid #f4f4f4;
+   width: 100%;
+   border-collapse: collapse;
+   border-spacing: 0;
 }
 .tblhead {
-	display: table-header-group;
-	vertical-align: middle;
-	border-color: inherit;
+   display: table-header-group;
+   vertical-align: middle;
+   border-color: inherit;
 }
 .tblhead th {
-	padding: 17px 0 20px;
-	vertical-align: top;
-	border-top: 2px solid #333;
-	font-weight: 700;
-	font-size: 14px;
-	line-height: 20px;
-	color: #333;
-	letter-spacing: -.5px;
+   padding: 17px 0 20px;
+   vertical-align: top;
+   border-top: 2px solid #333;
+   font-weight: 700;
+   font-size: 14px;
+   line-height: 20px;
+   color: #333;
+   letter-spacing: -.5px;
 }
 .tit_select {
-	display: table-cell;
-	width: 60px;
+   display: table-cell;
+   width: 60px;
 }
 .tit_address {
-	padding-left: 0;
-	text-indent: -8px;
-	width: auto;
+   padding-left: 0;
+   text-indent: -8px;
+   width: auto;
 }
 .tit_receive {
-	width: 120px;
+   width: 120px;
 }
 .tit_phone {
-	width: 100px;
+   width: 100px;
 }
 .tit_delivery {
-	width: 100px;
+   width: 100px;
 }
 .tit_modify {
-	width: 60px;
+   width: 60px;
 }
 .tbl td {
-	height: 90px;
-	font-size: 14px;
-	color: #333;
-	line-height: 22px;
-	letter-spacing: -0.4px;
-	vertical-align: middle;
-	text-align: center;
-	padding: 0;
+   height: 90px;
+   font-size: 14px;
+   color: #333;
+   line-height: 22px;
+   letter-spacing: -0.4px;
+   vertical-align: middle;
+   text-align: center;
+   padding: 0;
 }
 .tbl tr:first-child td {
-	border-top: 1px solid #333;
+   border-top: 1px solid #333;
 }
 .select {
-	display: table-cell;
+   display: table-cell;
 }
 .type_radio {
-	font-size: 14px;
-	line-height: 22px;
+   font-size: 14px;
+   line-height: 22px;
 }
 .type_radio input[type="radio"] {
-	position: absolute;
-	z-index: -1;
-	opacity: 0;
-	font-weight: 400;
-	letter-spacing: 0;
-	box-sizing: border-box;
-	padding: 0;
-	color: #4c4c4c;
-	font-size: 12px;
-	max-width: 100%;
-	margin: 0;
+   position: absolute;
+   z-index: -1;
+   opacity: 0;
+   font-weight: 400;
+   letter-spacing: 0;
+   box-sizing: border-box;
+   padding: 0;
+   color: #4c4c4c;
+   font-size: 12px;
+   max-width: 100%;
+   margin: 0;
 }
 .tbl .type_radio input[type="radio"] + .C_ico {
-	margialign: middle;
+   margin: 0;
+   vertical-align: middle;
 }
 .type_radio input[type="radio"]:checked + .C_ico {
-	background : url(/images/plus.jpg);
-	background-size: 24px 24px;
-	background-repeat: no-repeat;
+   background-image : url("images/plus.jpg");
+   background-size: 24px 24px;
+   background-repeat: no-repeat;
+}
+.type_radio input[type="radio"] + C.ico {
+   display: inline-block;
+   position: relative;
+   width: 24px;
+   border: 0 none;
+   background-image: url("images/plus.jpg");
+   background-size: 24px 24px;
+}
+.type_select .address {
+   padding-left: 2px;
+}
+.tbl_type1 .address {
+   padding: 20px 10px 20px 20px;
+}
+.badge_default {
+   display: block;
+   width: 74px;
+   height: 22px;
+   margin-bottom: 7px;
+   border-radius: 11px;
+   background-color: #f7f7f7;
+   font-weight: 700;
+   font-size: 12px;
+   color: #666;
+   line-height: 22px;
+   letter-spacing: 0;
+   text-align: center;
+}
+.addr {
+   padding: 0;
+   font-size: 16px;
+   color: #333;
+   line-height: 24px;
+   letter-spacing: -0.3px;
+   text-align: left;
+}
+.regular {
+   color: #666;
+}
+.modify {
+   width: 24px;
+   height: 24px;
+   border: 0 none;
 }
 </style>
 </head>
 <body>
-	<div id="main">
-		<div id="content">
-			<div class="page_aticle aticle_type2">
-			
-				<div id="myPageTop" class="page_aticle mypage_top">
-					<div class="mypagetop_user">
-						<div class="inner_mypagetop">
-							<div class="grade_user">
-								<div class="grade">
-									<span class="screen_out">등급</span> 
-									<span class="ico_grade class0">
-										<span class="inner_grade">
-											<span class="in_grade">일반</span>
-										</span>
-									</span>
-									<div class="grade_bnenfit">
-										<div class="user">
-											<strong class="name">신우경</strong> 
-											<span class="txt">님</span>
-										</div>
-										<div class="benefit">
-											<strong class="tit">첫구매 우대 - </strong>적립 5%
-										</div>
-										<div class="benefit">
-											<strong class="tit">첫구매 우대 - </strong>20,000원 이상 무료 배송
-										</div>
-										<div class="benefit"></div>
-									</div>
-								</div>
-								<div class="next">
-									<a href="#" class="total_grade">전체등급 보기</a> 
-									<a href="#" class="next_month">다음 달 예상등급 보기</a>
-								</div>
-							</div>
-							<ul class="list_mypage">
-								<li class="user_reserve">
-									<div class="link">
-										<div class="tit">적립금
-										</div>
-										<a href="#" class="info"> 0 원
-											<span class="date">소멸 예정 0 원</span>
-										</a>
-									</div>
-								</li>
-								<li class="user_coupon"><div class="link">
-									<div class="tit">쿠폰	</div>
-										<a href="#" class="info">1 개
-										</a>
-									</div>
-								</li>
-								<li class="user_kurlypass"><div class="link">
-										<div class="tit">컬리패스</div>
-										<a href="#" class="info info_link">	알아보기 
-										</a>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				
-				
-				<div id="snb" class="snb_cc">
-					<h2 class="tit_snb">마이컬리</h2>
-					<div class="inner_snb">
-						<ul class="list_menu">
-							<li><a href="/consumerBoard/cboard">주문내역</a></li>
-							<li class="on"><a href="/consumerBoard/shipping">배송지 관리</a></li>
-							<li><a href="/consumerBoard/alwaysLiving">늘 사는 것</a></li>
-							<li><a href="/consumerBoard/goodsReview">상품 후기</a></li>
-							<li><a href="/consumerBoard/savings">적립금</a></li>
-							<li><a href="/consumerBoard/coupon">쿠폰</a></li>
-							<li><a href="/consumerBoard/memberUpdate">개인 정보 수정</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="page_section">
-					<div class="head_aticle Jline">
-						<h2 class="tit Jlineheader">
-							배송지 관리 <span class="tit_sub">배송지에 따라 상품정보가 달라질 수 있습니다.</span>
-						</h2>
-						<div class="new_address">
-							<button type="button" class="Jbtn" id="newAddressAdd">
-								<img alt="배송지추가버튼" src="/images/plus.jpg" class="ico">새 배송지 추가
-							</button>
-						</div>
-					</div>
-					<div id="tblParent" class="type_select">
-						<table class="tbl tbl_type1">
-							<thead class="tblhead">
-								<tr>
-									<th class="tit_select">선택</th>
-									<th class="tit_address">주소</th>
-									<th class="tit_receive">받으실 분</th>
-									<th class="tit_phone">연락처</th>
-									<th class="tit_delivery">배송유형</th>
-									<th class="tit_modify">수정</th>
-								</tr>
-							</thead>
-							<tbody id="addrList">
-								<tr>
-									<td class="select type-radio">
-										<label class="skin_checkbox">
-											<input type="radio" name="addrNo" value="1" checked>
-											<span class="C_ico"></span>
-										</label>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+   <div id="main">
+      <div id="content">
+         <div class="page_aticle aticle_type2">
+         
+            <!-- 멤버 정보 -->
+            <jsp:include page="/WEB-INF/views/include/memberInfo_.jsp" />
+            
+            <!-- 사이드메뉴 -->
+            <jsp:include page="/WEB-INF/views/include/sideMenu_.jsp" />
+            
+            <div class="page_section">
+               <div class="head_aticle Jline">
+                  <h2 class="tit Jlineheader">
+                     배송지 관리 <span class="tit_sub">배송지에 따라 상품정보가 달라질 수 있습니다.</span>
+                  </h2>
+               </div>
+               <div id="tblParent" class="type_select">
+                  <table class="tbl tbl_type1">
+                     <thead class="tblhead">
+                        <tr>
+                           <th class="tit_address">아이디</th>
+                           <th class="tit_address">주소</th>
+                           <th class="tit_receive">받으실 분</th>
+                           <th class="tit_phone">연락처</th>
+                        </tr>
+                     </thead>
+                     <tbody id="addrList">
+                        <tr>
+                           <td class="name">${ memberVo.id }</td>
+                           <td class="address">
+                              <span class="badge_default">기본 배송지</span>
+                              <p class="addr">
+                                 ${ memberVo.address }
+                              </p>
+                           </td>
+                           <td class="name">${ memberVo.name }</td>
+                           <td class="phone">${ memberVo.tel }</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
 
-		</div>
-	</div>
-	<jsp:include page="/WEB-INF/views/include/footer_.jsp" />
+      </div>
+   </div>
+   <jsp:include page="/WEB-INF/views/include/footer_.jsp" />
 </body>
 </html>

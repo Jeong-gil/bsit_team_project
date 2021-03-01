@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>JollyStore</title>
 <link rel="stylesheet" href="/css/jcontent.css">
 </head>
 <jsp:include page="/WEB-INF/views/include/header_.jsp" />
@@ -61,7 +61,7 @@
                                        <table width="100%" style="table-layout: fixed">
                                           <tbody>
                                              <tr>
-                                             <!-- 공지 내용 -->
+                                                <!-- 공지 내용 -->
                                                 <td class="board_view_content"
                                                    style="word-wrap: break-word; word-break: break-all"
                                                    id="contents_820" valign="top">${ jnoticeVo.content }</td>
@@ -82,9 +82,24 @@
                                     <td align="center" style="padding-top: 10px;">
                                        <table width="100%">
                                           <tbody>
+                                             <c:if test="${ not empty sessionScope.id }">
+                                                <tr>
+                                                   <td align="right"><input type="button"
+                                                      value="공지삭제" class="bhs_button yb"
+                                                      style="float: none;" onclick="remove()"></td>
+                                                </tr>
+                                                <tr>
+                                                   <td align="right"><input type="button"
+                                                      value="공지수정" class="bhs_button yb"
+                                                      style="float: none;"
+                                                      onclick="location.href= '/userBoard/jnoticeModifyForm?num=${ jnoticeVo.num }&pageNum=${ pageNum }'">
+                                                   </td>
+                                                </tr>
+                                             </c:if>
                                              <tr>
-                                              <!-- 목록 -->
-                                                <td align="right"><a href="/userBoard/jnotice?pageNum=${ pageNum }"><span
+                                                <!-- 목록 -->
+                                                <td align="right"><a
+                                                   href="/userBoard/jnotice?pageNum=${ pageNum }"><span
                                                       class="bhs_button yb" style="float: none;">목록</span></a></td>
                                              </tr>
                                           </tbody>
@@ -96,11 +111,7 @@
                            <div
                               class="xans-element- xans-board xans-board-movement-1002 xans-board-movement xans-board-1002 ">
                               <ul>
-                                 <li class="prev "><strong>이전글</strong> <a href="#"></a>
-                                    <a href="#">ssssss</a></li>
-                                 <li class="next "><strong>다음글</strong> <a href="#"></a>
-                                    <a href="#">eeeeee</a></li>
-
+                                 
                                  <br>
                                  <table width="100%" cellpadding="5" cellspacing="0">
                                     <colgroup>
@@ -109,7 +120,6 @@
                                        <col style="padding-left: 10px">
                                     </colgroup>
                                  </table>
-
                               </ul>
                            </div>
                         </td>
@@ -121,5 +131,18 @@
       </div>
    </div>
    <jsp:include page="/WEB-INF/views/include/footer_.jsp" />
+   <script>
+      function remove() {
+         var result = confirm('정말 삭제하시겠습니까?');
+         console.log(typeof result);
+
+         if (result == false) {
+            return;
+         }
+
+         location.href = '/userBoard/delete?num=${ jnoticeVo.num }&pageNum=${ pageNum }';
+      }
+
+   </script>
 </body>
 </html>

@@ -25,7 +25,13 @@
 		SELECT id FROM jollymember
 		WHERE name = #{name} AND email = #{email}
 	</select>
-
+	
+	<!-- 비번 찾기 -->
+	<select id="getCountFindPw" resultType="String">
+		SELECT pw FROM jollymember
+		WHERE name = #{name} and id = #{id} and email = #{email}
+	</select>
+	
 	<!--로그인 -->
 	<select id="userCheck" resultType="String">
 		SELECT pw FROM jollymember
@@ -52,5 +58,40 @@
    <select id="getCountByPushId" resultType="int">
       SELECT COUNT(*) FROM jollymember WHERE id = #{id}
    </select>
-
+   
+   <select id="getMemberByID" resultType="memberVo">
+      SELECT * FROM jollymember WHERE id = #{id}
+   </select>
+   
+   <insert id="addOrderDetails" parameterType="java.util.List">
+	    INSERT INTO order_history (buyer, product, quantity, sale_price, order_id)
+		VALUES
+	    <foreach collection="list" item="item" separator=",">
+	        (#{item.buyer}, #{item.product}, #{item.quantity}, #{item.salePrice}, #{item.orderId})
+	    </foreach>
+	</insert>
+	
+	<insert id="addOrderDetailsPerPayment">
+		INSERT INTO order_details_per_payment (order_id, order_detail_title, total_price, buyer, reg_date) 
+		VALUES (#{orderId}, #{orderDetailTitle}, #{totalSalePrice}, #{id}, now())
+	</insert>
+	
+	<select id="getOrderDetails" resultType="orderDetailsVo">
+      SELECT * FROM order_details_per_payment WHERE buyer = #{id} ORDER BY reg_date DESC
+   </select>
+   
+   <select id="getOrderHistory" resultType="orderHistoryVo">
+   		SELECT * FROM order_history
+		WHERE buyer = #{id} AND order_id = #{orderId}
+   </select>
+   
+   <select id="getJQuestionById" resultType="memberVo">
+       SELECT email,tel from jolly.jollymember
+       WHERE id = #{id}
+    </select>
+    
+    <select id="getMemberInfo" resultType="memberVo">
+       SELECT * FROM jolly.jollymember where id = #{id}
+    </select>
+   
 </mapper>
